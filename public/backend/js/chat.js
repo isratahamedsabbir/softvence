@@ -1,0 +1,1 @@
+$((function(){"use strict";new PerfectScrollbar("#ChatBody",{useBothWheelAxes:!0,suppressScrollX:!0}),new PerfectScrollbar(".profile-details-main",{useBothWheelAxes:!0,suppressScrollX:!0})}));
