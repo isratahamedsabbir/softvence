@@ -46,15 +46,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        if (Auth::user()->hasRole('admin')) {
-            return redirect()->intended(route('admin.dashboard', absolute: false))->with('t-success', 'Login Successfully');
-        } elseif (Auth::user()->hasRole('retailer')) {
-            return redirect()->intended(route('retailer.dashboard', absolute: false))->with('t-success', 'Login Successfully');
-        } elseif (Auth::user()->hasRole('client')) {
-            return redirect()->intended(route('client.dashboard', absolute: false))->with('t-success', 'Login Successfully');
-        } else {
-            return redirect()->intended(route('home', absolute: false))->with('t-error', 'Something went wrong. Please try again.');
-        }
+        session()->put('t-success', 'Password Confirmed Successfully');
+        return app(\App\Http\Middleware\RedirectMiddleware::class)->handle($request, function () {});
 
     }
 }

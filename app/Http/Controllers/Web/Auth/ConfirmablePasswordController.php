@@ -37,6 +37,6 @@ class ConfirmablePasswordController extends Controller
 
         session()->put('t-success', 'Password Confirmed Successfully');
         
-        return redirect()->intended(route('dashboard', absolute: false));
+        return app(\App\Http\Middleware\RedirectMiddleware::class)->handle($request, function () {});
     }
 }
