@@ -115,7 +115,7 @@
                                             <td>{{ $schedule->service->charge }}</td>
                                         </tr>
                                         <tr>
-                                            <th>Trainer</th>
+                                            <th>Retailer</th>
                                             <td>{{ $schedule->service->user->name }}</td>
                                         </tr>
                                         <tr>

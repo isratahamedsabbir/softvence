@@ -26,7 +26,7 @@ class RegisterController extends Controller
         ]);
         try {
 
-            if ($request->input('role') == 'trainer') {
+            if ($request->input('role') == 'retailer') {
                 $status = 'inactive';
             } else {
                 $status = 'active';

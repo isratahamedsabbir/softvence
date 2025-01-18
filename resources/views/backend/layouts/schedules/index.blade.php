@@ -42,7 +42,7 @@
                                         <tr>
                                             <th class="bg-transparent border-bottom-0 wp-15">ID</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Service</th>
-                                            <th class="bg-transparent border-bottom-0 wp-15">Trainer</th>
+                                            <th class="bg-transparent border-bottom-0 wp-15">Retailer</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Customer</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Type</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Created</th>
@@ -119,8 +119,8 @@
                         searchable: true
                     },
                     {
-                        data: 'trainer',
-                        name: 'trainer',
+                        data: 'retailer',
+                        name: 'retailer',
                         orderable: true,
                         searchable: true
                     },

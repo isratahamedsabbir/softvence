@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
         then: function () {
             Route::middleware(['web', 'auth', 'admin'])->prefix('admin')->group(base_path('routes/backend.php'));
             Route::middleware(['api', 'customer'])->prefix('api/customer')->name('customer.')->group(base_path('routes/customer.php'));
-            Route::middleware(['api', 'trainer'])->prefix('api/trainer')->name('trainer.')->group(base_path('routes/trainer.php'));
+            Route::middleware(['api', 'retailer'])->prefix('api/retailer')->name('retailer.')->group(base_path('routes/retailer.php'));
         }
     )
     ->withBroadcasting(
@@ -32,7 +32,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'admin' => App\Http\Middleware\AdminMiddleware::class,
             'customer' => App\Http\Middleware\CustomerMiddleware::class,
-            'trainer' => App\Http\Middleware\TrainerMiddleware::class,
+            'retailer' => App\Http\Middleware\TrainerMiddleware::class,
             'authCheck' => App\Http\Middleware\AuthCheckMiddleware::class,
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,

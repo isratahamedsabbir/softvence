@@ -48,8 +48,8 @@ class RegisteredUserController extends Controller
 
         if (Auth::user()->hasRole('admin')) {
             return redirect()->intended(route('dashboard', absolute: false))->with('t-success', 'Login Successfully');
-        } elseif (Auth::user()->hasRole('trainer')) {
-            return redirect()->intended(route('trainer.dashboard', absolute: false))->with('t-success', 'Login Successfully');
+        } elseif (Auth::user()->hasRole('retailer')) {
+            return redirect()->intended(route('retailer.dashboard', absolute: false))->with('t-success', 'Login Successfully');
         } elseif (Auth::user()->hasRole('user')) {
             return redirect()->intended(route('home', absolute: false))->with('t-success', 'Login Successfully');
         } else {

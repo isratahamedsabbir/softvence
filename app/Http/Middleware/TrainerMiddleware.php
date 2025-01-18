@@ -11,7 +11,7 @@ class TrainerMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->hasRole('trainer') && auth('api')->user()->status === 'active') {
+        if (Auth::user()->hasRole('retailer') && auth('api')->user()->status === 'active') {
             return $next($request);
         }
 

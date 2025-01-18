@@ -12,8 +12,8 @@ class AuthCheckMiddleware
         if (Auth::check()) {
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->route('dashboard');
-            } elseif(Auth::user()->hasRole('trainer')) {
-                return redirect()->route('trainer.dashboard');
+            } elseif(Auth::user()->hasRole('retailer')) {
+                return redirect()->route('retailer.dashboard');
             } else{
                 return redirect()->route('profile'); 
             }
