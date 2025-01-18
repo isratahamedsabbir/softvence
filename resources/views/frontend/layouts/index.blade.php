@@ -1,9 +1,9 @@
 @php
 use App\Enums\PageEnum;
 use App\Enums\SectionEnum;
-$cms_banner = $cms->where('section', SectionEnum::HOME_BANNER)->first();
-$cms_banners = $cms->where('section', SectionEnum::HOME_BANNER);
-$cms_hero = $cms->where('section', SectionEnum::HERO)->first();
+$cms_banner = $cms->firstWhere('section', SectionEnum::HOME_BANNER);
+$cms_banners = $cms->where('section', SectionEnum::HOME_BANNER)->values();
+$cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
 @endphp
 
 @extends('frontend.app', ['title' => 'home'])
@@ -118,7 +118,7 @@ $cms_hero = $cms->where('section', SectionEnum::HERO)->first();
 
 <div class="bg-dark text-secondary px-4 py-5 text-center">
     <div class="py-5">
-        @if (isset(json_decode($cms_hero->metadata)->rating))
+        @if (isset($cms_hero->metadata) && isset(json_decode($cms_hero->metadata)->rating))
             <h2>{{ json_decode($cms_hero->metadata)->rating }}</h2>
         @endif
         <h1 class="display-5 fw-bold text-white">{{ $cms_hero->title ?? 'Dark mode hero' }}</h1>

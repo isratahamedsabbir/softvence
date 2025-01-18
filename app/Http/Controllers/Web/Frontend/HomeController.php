@@ -14,6 +14,6 @@ class HomeController extends Controller
     {
         $cms = CMS::where('page', PageEnum::HOME)->where('status', 'active')->get();
         $posts = Post::where('status', 'active')->get();
-        return view('frontend.layouts.index', compact('cms', 'posts'));
+        return view('frontend.layouts.index', compact('posts', 'cms'));
     }
 }
