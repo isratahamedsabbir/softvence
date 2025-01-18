@@ -20,8 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::middleware(['web', 'auth', 'admin'])->prefix('admin')->group(base_path('routes/backend.php'));
-            Route::middleware(['api', 'client'])->prefix('api/client')->name('client.')->group(base_path('routes/client.php'));
-            Route::middleware(['api', 'retailer'])->prefix('api/retailer')->name('retailer.')->group(base_path('routes/retailer.php'));
+            Route::middleware(['web', 'client'])->prefix('client')->name('client.')->group(base_path('routes/client.php'));
+            Route::middleware(['web', 'retailer'])->prefix('retailer')->name('retailer.')->group(base_path('routes/retailer.php'));
         }
     )
     ->withBroadcasting(

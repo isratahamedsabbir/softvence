@@ -22,11 +22,17 @@ use App\Http\Controllers\Web\Backend\DashboardController;
 use App\Http\Controllers\Web\Backend\PageController;
 use App\Http\Controllers\Web\Backend\PostController;
 
-Route::get("admin/dashboard", [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
+
 
 Route::resource('users', UserController::class);
+Route::controller(UserController::class)->prefix('users')->name('users.')->group(function () {
+    Route::get('/new', 'new')->name('new.index');
+    Route::get('/ajax/new/count', 'newCount')->name('ajax.new.count');
+});
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', RoleController::class);
+
 
 Route::controller(CategoryController::class)->prefix('category')->name('category.')->group(function () {
     Route::get('/', 'index')->name('index');
@@ -137,20 +143,6 @@ Route::prefix('cms')->name('cms.')->group(function () {
 
 });
 
-
-
-
-//Users
-Route::controller(UserController::class)->prefix('users')->name('users.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/status/{id}', 'status')->name('status');
-    Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/edit/{id}', 'edit')->name('edit');
-    Route::patch('/update/{id}', 'update')->name('update');
-    Route::get('/new', 'new')->name('new.index');
-    Route::get('/ajax/new/count', 'newCount')->name('ajax.new.count');
-});
 
 Route::controller(NotificationController::class)->prefix('notification')->name('notification.')->group(function () {
     Route::get('/', 'index')->name('index');
