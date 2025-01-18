@@ -43,7 +43,7 @@
                                             <th class="bg-transparent border-bottom-0 wp-15">ID</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Service</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Retailer</th>
-                                            <th class="bg-transparent border-bottom-0 wp-15">Customer</th>
+                                            <th class="bg-transparent border-bottom-0 wp-15">Client</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Type</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Created</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Payment</th>
@@ -125,8 +125,8 @@
                         searchable: true
                     },
                     {
-                        data: 'customer',
-                        name: 'customer',
+                        data: 'client',
+                        name: 'client',
                         orderable: true,
                         searchable: true
                     },

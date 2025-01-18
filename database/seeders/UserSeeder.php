@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
 
         DB::table('roles')->insert([
             ['name' => 'admin', 'guard_name' => 'web'],
-            ['name' => 'customer', 'guard_name' => 'web'],
+            ['name' => 'client', 'guard_name' => 'web'],
             ['name' => 'retailer', 'guard_name' => 'web']
         ]);
 
@@ -36,8 +36,8 @@ class UserSeeder extends Seeder
             'email_verified_at' => now(),
            ],
            [
-            'name' => 'User',
-            'email' => 'user@user.com',
+            'name' => 'client',
+            'email' => 'client@client.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
            ],

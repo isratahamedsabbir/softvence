@@ -20535,7 +20535,7 @@
       }
       /**
        * @param step Specified step.
-       * @param skip Skip customer perform call.
+       * @param skip Skip client perform call.
        * @param modBy Sampling window size.
        * @param modDataCount Sampling count.
        * @return whether unfinished.

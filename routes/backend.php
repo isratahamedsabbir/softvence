@@ -22,9 +22,7 @@ use App\Http\Controllers\Web\Backend\DashboardController;
 use App\Http\Controllers\Web\Backend\PageController;
 use App\Http\Controllers\Web\Backend\PostController;
 
-Route::controller(DashboardController::class)->group(function () {
-    Route::get('dashboard', 'index')->name('dashboard');
-});
+Route::get("admin/dashboard", [DashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::resource('users', UserController::class);
 Route::resource('permissions', PermissionController::class);

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class TrainerMiddleware
+class RetailerMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
@@ -15,7 +15,7 @@ class TrainerMiddleware
             return $next($request);
         }
 
-        return response()->json(['t-error' => 'Unauthorized action.'], Response::HTTP_FORBIDDEN);
+        return abort(403, 'Unauthorized action.');
     }
 }
 

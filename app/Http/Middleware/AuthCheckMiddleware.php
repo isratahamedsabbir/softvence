@@ -11,11 +11,11 @@ class AuthCheckMiddleware
     {
         if (Auth::check()) {
             if (Auth::user()->hasRole('admin')) {
-                return redirect()->route('dashboard');
+                return redirect()->route('admin.dashboard');
             } elseif(Auth::user()->hasRole('retailer')) {
                 return redirect()->route('retailer.dashboard');
             } else{
-                return redirect()->route('profile'); 
+                return redirect()->route('client.dashboard');
             }
         }
         return $next($request);

@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::middleware(['web', 'auth', 'admin'])->prefix('admin')->group(base_path('routes/backend.php'));
-            Route::middleware(['api', 'customer'])->prefix('api/customer')->name('customer.')->group(base_path('routes/customer.php'));
+            Route::middleware(['api', 'client'])->prefix('api/client')->name('client.')->group(base_path('routes/client.php'));
             Route::middleware(['api', 'retailer'])->prefix('api/retailer')->name('retailer.')->group(base_path('routes/retailer.php'));
         }
     )
@@ -31,8 +31,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'admin' => App\Http\Middleware\AdminMiddleware::class,
-            'customer' => App\Http\Middleware\CustomerMiddleware::class,
-            'retailer' => App\Http\Middleware\TrainerMiddleware::class,
+            'client' => App\Http\Middleware\CustomerMiddleware::class,
+            'retailer' => App\Http\Middleware\RetailerMiddleware::class,
             'authCheck' => App\Http\Middleware\AuthCheckMiddleware::class,
             'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,

@@ -11,10 +11,10 @@ class CustomerMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->hasRole('customer')) {
+        if (Auth::check() && Auth::user()->hasRole('client')) {
             return $next($request);
         }
-        return response()->json(['t-error' => 'Unauthorized action.'], Response::HTTP_FORBIDDEN);
+        return abort(403, 'Unauthorized action.');
     }
 }
 
