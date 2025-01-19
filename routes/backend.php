@@ -123,22 +123,22 @@ Route::prefix('cms')->name('cms.')->group(function () {
         Route::patch('/section/bg', 'update')->name('section.bg.update');
     });
 
-    Route::controller(HomeBannerController::class)->group(function () {
-        Route::get('/banner', 'index')->name('home.banner.index');
-        Route::get('/banner/create', 'create')->name('home.banner.create');
-        Route::post('/banner', 'store')->name('home.banner.store');
-        Route::get('/banner/{id}', 'show')->name('home.banner.show');
-        Route::get('/banner/{id}/edit', 'edit')->name('home.banner.edit');
-        Route::patch('/banner/{id}', 'update')->name('home.banner.update');
-        Route::delete('/banner/{id}', 'destroy')->name('home.banner.destroy');
-        Route::get('/banner/{id}/status', 'status')->name('home.banner.status');
-
-        Route::put('/banner/content', 'content')->name('home.banner.content');    
+    Route::prefix('home/banner')->name('home.banner.')->controller(HomeBannerController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::patch('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    
+        Route::get('/{id}/status', 'status')->name('status');
+        Route::put('/content', 'content')->name('content');
     });
 
-    Route::controller(HomeHeroController::class)->group(function () {
-        Route::get('/hero', 'index')->name('home.hero.index');
-        Route::put('/home/hero', 'update')->name('home.hero.update');
+    Route::prefix('home/hero')->name('home.hero.')->controller(HomeHeroController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::put('/update', 'update')->name('update');
     });
 
 });

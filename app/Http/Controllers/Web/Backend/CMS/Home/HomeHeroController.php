@@ -46,7 +46,7 @@ class HomeHeroController extends Controller
                 CMS::create($validatedData);
             }
 
-            return redirect()->route('cms.home.hero')->with('t-success', 'Updated successfully');
+            return redirect()->route('cms.home.hero.index')->with('t-success', 'Updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }
