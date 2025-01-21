@@ -131,19 +131,101 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
     </div>
 </div>
 
-
-<div class="bg-white text-secondary px-4 py-5 text-center">
-  <h1 class="display-5 fw-bold text-dark">Get in Touch</h1>
-  <div class="d-flex justify-content-center">
-    <div class="col-sm-3 my-1">
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@</div>
+<form action="{{ route('subscribe.store') }}" method="post">
+    @csrf
+    <div class="bg-light text-dark px-5 py-5 text-center rounded shadow-lg">
+        <h1 class="display-4 fw-bold mb-4">Stay Connected</h1>
+        <div class="d-flex justify-content-center">
+            <div class="col-md-4 my-2">
+                <div class="input-group">
+                    <span class="input-group-text bg-primary text-white">@</span>
+                    <input type="email" name="email" class="form-control" placeholder="Enter your email" aria-label="Email">
+                </div>
+            </div>
         </div>
-        <input type="text" name="email" class="form-control" id="inlineFormInputGroupUsername" placeholder="Your Email">
-      </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+            <button type="submit" class="btn btn-success btn-lg px-5 fw-bold">Subscribe Now</button>
+        </div>
     </div>
-  </div>
+</form>
+
+
+<div class="container py-5">
+    <div class="text-center mb-4">
+        <h2 class="pb-2 border-bottom">Contact Us</h2>
+        <p class="mt-3 text-muted">
+            Have questions or feedback? We're here to help! Fill out the form below, and we'll get in touch promptly.
+        </p>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <form action="{{ route('contact.store') }}" method="post" class="needs-validation bg-light p-4 p-md-5 rounded shadow-sm" novalidate>
+                @csrf
+                <div class="row g-4">
+                    <!-- Name -->
+                    <div class="col-md-6">
+                        <label for="name" class="form-label fw-semibold">Your Name</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            class="form-control border-2" 
+                            id="name" 
+                            placeholder="John Doe" 
+                            required>
+                        <div class="invalid-feedback">Please enter your name.</div>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="col-md-6">
+                        <label for="email" class="form-label fw-semibold">Email Address</label>
+                        <input 
+                            type="email" 
+                            name="email" 
+                            class="form-control border-2" 
+                            id="email" 
+                            placeholder="example@example.com" 
+                            required>
+                        <div class="invalid-feedback">Please provide a valid email address.</div>
+                    </div>
+
+                    <!-- Subject -->
+                    <div class="col-md-12">
+                        <label for="subject" class="form-label fw-semibold">Subject</label>
+                        <input 
+                            type="text" 
+                            name="subject" 
+                            class="form-control border-2" 
+                            id="subject" 
+                            placeholder="What's this about?" 
+                            required>
+                        <div class="invalid-feedback">Please provide a subject.</div>
+                    </div>
+
+                    <!-- Message -->
+                    <div class="col-12">
+                        <label for="message" class="form-label fw-semibold">Your Message</label>
+                        <textarea 
+                            name="message" 
+                            class="form-control border-2" 
+                            id="message" 
+                            rows="5" 
+                            placeholder="Write your message here..." 
+                            required></textarea>
+                        <div class="invalid-feedback">Please enter your message.</div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-primary px-5 py-2">
+                            <i class="bi bi-envelope-fill me-2"></i>Send Message
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
 
 @endsection

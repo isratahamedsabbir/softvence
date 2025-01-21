@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\SocialLoginController;
+use App\Http\Controllers\Web\Frontend\ContactController;
 use App\Http\Controllers\Web\Frontend\HomeController;
+use App\Http\Controllers\Web\Frontend\SubscriberController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +15,8 @@ Route::get('social-login/{provider}',[SocialLoginController::class,'RedirectToPr
 Route::get('social-login/{provider}/callback',[SocialLoginController::class,'HandleProviderCallback']);
 
 
-Route::post('visitor/subscribe',[::class,'RedirectToProvider'])->name('social.login');
+Route::post('subscribe/store',[SubscriberController::class,'store'])->name('subscribe.store');
+Route::post('contact/store',[ContactController::class,'store'])->name('contact.store');
 
 
 

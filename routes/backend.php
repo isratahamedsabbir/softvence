@@ -22,6 +22,8 @@ use App\Http\Controllers\Web\Backend\DashboardController;
 use App\Http\Controllers\Web\Backend\PageController;
 use App\Http\Controllers\Web\Backend\PostController;
 use App\Http\Controllers\Web\Backend\SubcategoryController;
+use App\Http\Controllers\Web\Backend\SubscriberController;
+use App\Models\Subscriber;
 
 Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
 
@@ -160,3 +162,6 @@ Route::controller(NotificationController::class)->prefix('notification')->name('
     Route::post('read/single/{id}', 'readSingle')->name('read.single');
     Route::POST('read/all', 'readAll')->name('read.all');
 });
+
+
+Route::get('subscribe', [SubscriberController::class, 'index'])->name('subscribe.index');
