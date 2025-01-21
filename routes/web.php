@@ -13,6 +13,9 @@ Route::get('social-login/{provider}',[SocialLoginController::class,'RedirectToPr
 Route::get('social-login/{provider}/callback',[SocialLoginController::class,'HandleProviderCallback']);
 
 
+Route::post('visitor/subscribe',[::class,'RedirectToProvider'])->name('social.login');
+
+
 
 // Routes for running artisan commands
 Route::get('/run-migrate-fresh', function () {

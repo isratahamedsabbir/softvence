@@ -130,4 +130,20 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
         </div>
     </div>
 </div>
+
+
+<div class="bg-white text-secondary px-4 py-5 text-center">
+  <h1 class="display-5 fw-bold text-dark">Get in Touch</h1>
+  <div class="d-flex justify-content-center">
+    <div class="col-sm-3 my-1">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">@</div>
+        </div>
+        <input type="text" name="email" class="form-control" id="inlineFormInputGroupUsername" placeholder="Your Email">
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection

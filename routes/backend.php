@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\DashboardController;
 use App\Http\Controllers\Web\Backend\PageController;
 use App\Http\Controllers\Web\Backend\PostController;
+use App\Http\Controllers\Web\Backend\SubcategoryController;
 
 Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
 
@@ -35,6 +36,16 @@ Route::resource('roles', RoleController::class);
 
 
 Route::controller(CategoryController::class)->prefix('category')->name('category.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::get('/status/{id}', 'status')->name('status');
+});
+
+Route::controller(SubcategoryController::class)->prefix('subcategory')->name('subcategory.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
