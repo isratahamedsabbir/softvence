@@ -7,6 +7,7 @@ use App\Http\Controllers\Web\Backend\CategoryController;
 use App\Http\Controllers\Web\Backend\CMS\AuthPageController;
 use App\Http\Controllers\Web\Backend\CMS\Home\HomeBannerController;
 use App\Http\Controllers\Web\Backend\CMS\Home\HomeHeroController;
+use App\Http\Controllers\Web\Backend\ContactController;
 use App\Http\Controllers\Web\Backend\NotificationController;
 use App\Http\Controllers\Web\Backend\Settings\FirebaseController;
 use App\Http\Controllers\Web\Backend\Settings\ProfileController;
@@ -21,11 +22,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\DashboardController;
 use App\Http\Controllers\Web\Backend\PageController;
 use App\Http\Controllers\Web\Backend\PostController;
+use App\Http\Controllers\Web\Backend\SocialLinkController;
 use App\Http\Controllers\Web\Backend\SubcategoryController;
 use App\Http\Controllers\Web\Backend\SubscriberController;
 use App\Models\Subscriber;
 
-Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
+Route::get("dashboard", [DashboardController::class, 'index'])->name('admin.dashboard');
 
 
 Route::resource('users', UserController::class);
@@ -36,6 +38,15 @@ Route::controller(UserController::class)->prefix('users')->name('users.')->group
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', RoleController::class);
 
+Route::controller(SocialLinkController::class)->prefix('social')->name('social.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{id}', 'edit')->name('edit');
+    Route::post('/update/{id}', 'update')->name('update');
+    Route::delete('/delete/{id}', 'destroy')->name('destroy');
+    Route::get('/status/{id}', 'status')->name('status');
+});
 
 Route::controller(CategoryController::class)->prefix('category')->name('category.')->group(function () {
     Route::get('/', 'index')->name('index');
@@ -164,4 +175,9 @@ Route::controller(NotificationController::class)->prefix('notification')->name('
 });
 
 
-Route::get('subscribe', [SubscriberController::class, 'index'])->name('subscribe.index');
+Route::get('subscriber', [SubscriberController::class, 'index'])->name('subscriber.index');
+
+Route::controller(ContactController::class)->prefix('contact')->name('contact.')->group(function () {
+    Route::get('/','index')->name('index');
+    Route::get('/status/{id}', 'status')->name('status');
+});

@@ -131,7 +131,7 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
     </div>
 </div>
 
-<form action="{{ route('subscribe.store') }}" method="post">
+<form action="{{ route('subscriber.store') }}" method="post">
     @csrf
     <div class="bg-light text-dark px-5 py-5 text-center rounded shadow-lg">
         <h1 class="display-4 fw-bold mb-4">Stay Connected</h1>
