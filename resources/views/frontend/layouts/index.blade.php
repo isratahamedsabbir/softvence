@@ -119,7 +119,7 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
 <div class="bg-dark text-secondary px-4 py-5 text-center">
     <div class="py-5">
         @if (isset($cms_hero->metadata) && isset(json_decode($cms_hero->metadata)->rating))
-            <h2>{{ json_decode($cms_hero->metadata)->rating }}</h2>
+        <h2>{{ json_decode($cms_hero->metadata)->rating }}</h2>
         @endif
         <h1 class="display-5 fw-bold text-white">{{ $cms_hero->title ?? 'Dark mode hero' }}</h1>
         <div class="col-lg-6 mx-auto">
@@ -140,6 +140,9 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
                 <div class="input-group">
                     <span class="input-group-text bg-primary text-white">@</span>
                     <input type="email" name="email" class="form-control" placeholder="Enter your email" aria-label="Email">
+                    @error('email')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -165,25 +168,25 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
                     <!-- Name -->
                     <div class="col-md-6">
                         <label for="name" class="form-label fw-semibold">Your Name</label>
-                        <input 
-                            type="text" 
-                            name="name" 
-                            class="form-control border-2" 
-                            id="name" 
-                            placeholder="John Doe" 
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control border-2"
+                            id="name"
+                            placeholder="John Doe"
                             required>
                         <div class="invalid-feedback">Please enter your name.</div>
                     </div>
-                    
+
                     <!-- Email -->
                     <div class="col-md-6">
                         <label for="email" class="form-label fw-semibold">Email Address</label>
-                        <input 
-                            type="email" 
-                            name="email" 
-                            class="form-control border-2" 
-                            id="email" 
-                            placeholder="example@example.com" 
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control border-2"
+                            id="email"
+                            placeholder="example@example.com"
                             required>
                         <div class="invalid-feedback">Please provide a valid email address.</div>
                     </div>
@@ -191,12 +194,12 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
                     <!-- Subject -->
                     <div class="col-md-12">
                         <label for="subject" class="form-label fw-semibold">Subject</label>
-                        <input 
-                            type="text" 
-                            name="subject" 
-                            class="form-control border-2" 
-                            id="subject" 
-                            placeholder="What's this about?" 
+                        <input
+                            type="text"
+                            name="subject"
+                            class="form-control border-2"
+                            id="subject"
+                            placeholder="What's this about?"
                             required>
                         <div class="invalid-feedback">Please provide a subject.</div>
                     </div>
@@ -204,12 +207,12 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
                     <!-- Message -->
                     <div class="col-12">
                         <label for="message" class="form-label fw-semibold">Your Message</label>
-                        <textarea 
-                            name="message" 
-                            class="form-control border-2" 
-                            id="message" 
-                            rows="5" 
-                            placeholder="Write your message here..." 
+                        <textarea
+                            name="message"
+                            class="form-control border-2"
+                            id="message"
+                            rows="5"
+                            placeholder="Write your message here..."
                             required></textarea>
                         <div class="invalid-feedback">Please enter your message.</div>
                     </div>
