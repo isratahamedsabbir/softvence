@@ -142,9 +142,9 @@ Route::controller(GoogleMapController::class)->group(function () {
 
 Route::prefix('cms')->name('cms.')->group(function () {
 
-    Route::controller(AuthPageController::class)->prefix('page/auth')->name('page.auth.')->group(function () {
-        Route::get('/section/bg', 'index')->name('section.bg.index');
-        Route::patch('/section/bg', 'update')->name('section.bg.update');
+    Route::prefix('page/auth')->name('page.auth.')->controller(AuthPageController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::put('/content', 'content')->name('content');
     });
 
     Route::prefix('home/banner')->name('home.banner.')->controller(HomeBannerController::class)->group(function () {
@@ -156,15 +156,15 @@ Route::prefix('cms')->name('cms.')->group(function () {
         Route::patch('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::get('/{id}/status', 'status')->name('status');
-        
+
         Route::put('/content', 'content')->name('content');
     });
 
     Route::prefix('home/hero')->name('home.hero.')->controller(HomeHeroController::class)->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::put('/update', 'update')->name('update');
+        Route::put('/content', 'content')->name('content');
     });
-
+    
 });
 
 
@@ -178,6 +178,6 @@ Route::controller(NotificationController::class)->prefix('notification')->name('
 Route::get('subscriber', [SubscriberController::class, 'index'])->name('subscriber.index');
 
 Route::controller(ContactController::class)->prefix('contact')->name('contact.')->group(function () {
-    Route::get('/','index')->name('index');
+    Route::get('/', 'index')->name('index');
     Route::get('/status/{id}', 'status')->name('status');
 });

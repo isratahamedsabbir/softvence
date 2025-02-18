@@ -28,16 +28,16 @@
                 <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
                     <div class="card box-shadow-0">
                         <div class="card-body">
-                            <form class="form-horizontal" method="post" action="{{ route('admin.cms.page.auth.section.bg.update') }}" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="post" action="{{ route('admin.cms.page.auth.content') }}" enctype="multipart/form-data">
                                 @csrf
-                                @method('PATCH')
+                                @method('PUT')
 
                                 <div class="row mb-4">
 
                                     <div class="form-group">
                                         <label for="image" class="form-label">Image:</label>
                                         <input type="file" class="dropify form-control @error('image') is-invalid @enderror"
-                                            data-default-file="{{ isset($data) && $data->image != null ? asset($data->image) : asset('default/logo.png') }}"
+                                            data-default-file="{{ isset($section) && $section->image != null ? asset($section->image) : asset('default/logo.png') }}"
                                             name="image" id="image">
                                         @error('image')
                                         <span class="text-danger">{{ $message }}</span>

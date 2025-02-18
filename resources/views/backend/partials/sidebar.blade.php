@@ -149,7 +149,7 @@
                     </a>
 
                     <ul class="slide-menu">
-                        <li><a href="{{ route('admin.cms.page.auth.section.bg.index') }}" class="slide-item">Auth Page</a></li>
+                        <li><a href="{{ route('admin.cms.page.auth.index') }}" class="slide-item">Auth Page</a></li>
                     </ul>
                 </li>
                 <li class="slide">

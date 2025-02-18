@@ -30,7 +30,7 @@
                         <div class="tab-pane active show" id="editProfile">
                             <div class="card">
                                 <div class="card-body border-0">
-                                    <form method="POST" action="{{ route('admin.cms.home.hero.update') }}" enctype="multipart/form-data">
+                                    <form method="POST" action="{{ route('admin.cms.home.hero.content') }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
 
@@ -39,7 +39,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="rating" class="form-label">Rating:</label>
-                                                    <input type="number" class="form-control @error('rating') is-invalid @enderror" name="rating" placeholder="Enter here rating" id="rating" value="{{ old('rating', isset($hero->metadata) ? json_decode($hero->metadata)->rating ?? '' : '') }}" min="1" max="5">
+                                                    <input type="number" class="form-control @error('rating') is-invalid @enderror" name="rating" placeholder="Enter here rating" id="rating" value="{{ old('rating', isset($section->metadata) ? json_decode($section->metadata)->rating ?? '' : '') }}" min="1" max="5">
                                                     @error('rating')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -52,7 +52,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="title" class="form-label">Title:</label>
-                                                    <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Enter here title" id="title" value="{{ $hero->title ?? '' }}">
+                                                    <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" placeholder="Enter here title" id="title" value="{{ $section->title ?? '' }}">
                                                     @error('title')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -64,7 +64,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="description" class="form-label">Description:</label>
-                                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" placeholder="Enter here description" rows="3">{{ $hero->description ?? '' }}</textarea>
+                                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" placeholder="Enter here description" rows="3">{{ $section->description ?? '' }}</textarea>
                                                     @error('description')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -76,7 +76,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="btn_text" class="form-label">Button Text:</label>
-                                                    <input type="text" class="form-control @error('btn_text') is-invalid @enderror" name="btn_text" placeholder="Enter here button text" id="btn_text" value="{{ $hero->btn_text ?? '' }}">
+                                                    <input type="text" class="form-control @error('btn_text') is-invalid @enderror" name="btn_text" placeholder="Enter here button text" id="btn_text" value="{{ $section->btn_text ?? '' }}">
                                                     @error('btn_text')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -85,7 +85,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="btn_link" class="form-label">Button Link:</label>
-                                                    <input type="text" class="form-control @error('btn_link') is-invalid @enderror" name="btn_link" placeholder="Enter here link" id="btn_link" value="{{ $hero->btn_link ?? '' }}">
+                                                    <input type="text" class="form-control @error('btn_link') is-invalid @enderror" name="btn_link" placeholder="Enter here link" id="btn_link" value="{{ $section->btn_link ?? '' }}">
                                                     @error('btn_link')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -99,7 +99,7 @@
                                                     <label for="image" class="form-label">Side Image:</label>
                                                     <input type="file" class="dropify @error('image') is-invalid @enderror" name="image"
                                                         id="image"
-                                                        data-default-file="{{ isset($hero->image) ? asset($hero->image) : '' }}">
+                                                        data-default-file="{{ isset($section->image) ? asset($section->image) : '' }}">
                                                     @error('image')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror

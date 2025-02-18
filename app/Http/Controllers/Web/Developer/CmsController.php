@@ -189,7 +189,7 @@ class CmsController extends Controller
             }
 
             // Update the meta data
-            if(!$request->has('rating')) {
+            if($request->has('rating')) {
                 $meta = json_decode($Review->metadata);
                 $meta->rating = $validatedData['rating'];
                 $validatedData['metadata'] = json_encode($meta);
@@ -266,7 +266,6 @@ class CmsController extends Controller
 
     public function content(Request $request)
     {
-        
         $validatedData = request()->validate([
             'name'              => 'nullable|string|max:50',
             'title'             => 'nullable|string|max:255',
@@ -277,45 +276,52 @@ class CmsController extends Controller
             'image'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'btn_text'          => 'nullable|string|max:50',
             'btn_link'          => 'nullable|string|max:100',
-            'btn_color'         => 'nullable|string|max:50'
+            'btn_color'         => 'nullable|string|max:50',
+            'rating'            => 'nullable|integer|min:1|max:5'
         ]);
         try {
-            // Update the page and section if necessary
-            $validatedData['page'] = $this->page->value;
-            $validatedData['section'] = $this->item->value;
-
-            if (CMS::where('page', $validatedData['page'])->where('section', $validatedData['section'])->exists()) {
-                $Review = CMS::where('page', $validatedData['page'])->where('section', $validatedData['section'])->first();
-
+            $validatedData['page'] = $this->page;
+            $validatedData['section'] = $this->item;
+            $section = CMS::where('page', $this->page)->where('section', $this->item)->first();
+            if ($section) {
+                
                 if($request->hasFile('bg')) {
-
-                    if ($Review->bg && file_exists(public_path($Review->bg))) {
-                        Helper::fileDelete(public_path($Review->bg));
+                    if ($section->bg && file_exists(public_path($section->bg))) {
+                        Helper::fileDelete(public_path($section->bg));
                     }
-
                     $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
                 }
     
                 if ($request->hasFile('image')) {
-
-                    if ($Review->image && file_exists(public_path($Review->image))) {
-                        Helper::fileDelete(public_path($Review->image));
+                    
+                    if ($section->image && file_exists(public_path($section->image))) {
+                        Helper::fileDelete(public_path($section->image));
                     }
-
                     $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
+                }
+
+                if($request->has('rating')) {
+                    $meta = json_decode($section->metadata);
+                    $meta->rating = $validatedData['rating'];
+                    $validatedData['metadata'] = json_encode($meta);
+                    unset($validatedData['rating']);
                 }
 
                 CMS::where('page', $validatedData['page'])->where('section', $validatedData['section'])->update($validatedData);
             } else {
-
+                
                 if ($request->hasFile('bg')) {
-
                     $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
                 }
                 
                 if ($request->hasFile('image')) {
-
                     $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
+                }
+
+                if($request->has('rating')) {
+                    $metadata = json_encode(['rating' => $validatedData['rating']]);
+                    $validatedData['metadata'] = $metadata;
+                    unset($validatedData['rating']);
                 }
 
                 CMS::create($validatedData);
