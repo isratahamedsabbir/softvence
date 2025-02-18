@@ -63,9 +63,7 @@ class HomeHeroController extends Controller
                 }
 
                 if($request->has('rating')) {
-                    $meta = json_decode($section->metadata);
-                    $meta->rating = $validatedData['rating'];
-                    $validatedData['metadata'] = json_encode($meta);
+                    $validatedData['metadata']['rating'] = $validatedData['rating'];
                     unset($validatedData['rating']);
                 }
 
@@ -81,8 +79,7 @@ class HomeHeroController extends Controller
                 }
 
                 if($request->has('rating')) {
-                    $metadata = json_encode(['rating' => $validatedData['rating']]);
-                    $validatedData['metadata'] = $metadata;
+                    $validatedData['metadata']['rating'] = $validatedData['rating'];
                     unset($validatedData['rating']);
                 }
 

@@ -1569,8 +1569,8 @@ $cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
             <!-- Hero -->
             <div class="section pb-7" id="Team">
                 <div class="container text-center">
-                    @if (isset($cms_hero->metadata) && isset(json_decode($cms_hero->metadata)->rating))
-                    <h2>{{ json_decode($cms_hero->metadata)->rating }}</h2>
+                    @if (isset($cms_hero->metadata['rating']))
+                    <h2>{{ $cms_hero->metadata['rating'] }}</h2>
                     @endif
                     <h1 class="display-5">{{ $cms_hero->title ?? 'Dark mode hero' }}</h1>
                     <div class="col-lg-6 mx-auto">

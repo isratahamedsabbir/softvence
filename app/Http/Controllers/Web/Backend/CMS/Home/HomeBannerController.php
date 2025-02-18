@@ -114,8 +114,7 @@ class HomeBannerController extends Controller
 
             // Create or update the CMS entry
             if($request->has('rating')) {
-                $metadata = json_encode(['rating' => $validatedData['rating']]);
-                $validatedData['metadata'] = $metadata;
+                $validatedData['metadata']['rating'] = $validatedData['rating'];
                 unset($validatedData['rating']);
             }
 
@@ -189,10 +188,8 @@ class HomeBannerController extends Controller
             }
 
             // Update the meta data
-            if(!$request->has('rating')) {
-                $meta = json_decode($Review->metadata);
-                $meta->rating = $validatedData['rating'];
-                $validatedData['metadata'] = json_encode($meta);
+            if($request->has('rating')) {
+                $validatedData['metadata']['rating'] = $validatedData['rating'];
                 unset($validatedData['rating']);
             }
 
@@ -301,9 +298,7 @@ class HomeBannerController extends Controller
                 }
 
                 if($request->has('rating')) {
-                    $meta = json_decode($section->metadata);
-                    $meta->rating = $validatedData['rating'];
-                    $validatedData['metadata'] = json_encode($meta);
+                    $validatedData['metadata']['rating'] = $validatedData['rating'];
                     unset($validatedData['rating']);
                 }
 
@@ -319,8 +314,7 @@ class HomeBannerController extends Controller
                 }
 
                 if($request->has('rating')) {
-                    $metadata = json_encode(['rating' => $validatedData['rating']]);
-                    $validatedData['metadata'] = $metadata;
+                    $validatedData['metadata']['rating'] = $validatedData['rating'];
                     unset($validatedData['rating']);
                 }
 

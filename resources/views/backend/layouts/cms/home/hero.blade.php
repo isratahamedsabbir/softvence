@@ -1,7 +1,6 @@
 @extends('backend.app', ['title' => 'Update Hero'])
 
 @section('content')
-
 <!--app-content open-->
 <div class="app-content main-content mt-0">
     <div class="side-app">
@@ -39,7 +38,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="rating" class="form-label">Rating:</label>
-                                                    <input type="number" class="form-control @error('rating') is-invalid @enderror" name="rating" placeholder="Enter here rating" id="rating" value="{{ old('rating', isset($section->metadata) ? json_decode($section->metadata)->rating ?? '' : '') }}" min="1" max="5">
+                                                    <input type="number" class="form-control @error('rating') is-invalid @enderror" name="rating" placeholder="Enter here rating" id="rating" value="{{ old('rating', isset($section->metadata) ? $section->metadata['rating'] ?? '' : '') }}" min="1" max="5">
                                                     @error('rating')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
