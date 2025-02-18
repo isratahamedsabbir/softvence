@@ -34,7 +34,7 @@ class AuthPageController extends Controller
             } else {
                 CMS::create($validatedData);
             }
-            return redirect()->route('cms.page.auth.section.bg.index')->with('t-success', 'Updated successfully');
+            return redirect()->route('admin.cms.page.auth.section.bg.index')->with('t-success', 'Updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }

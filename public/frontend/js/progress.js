@@ -1,0 +1,1 @@
+!function(a){"use strict";var s=a("#btnToggleAnimatedProgress"),r=a("#animatedBar");s.on("click",(function(a){r.hasClass("progress-bar-animated")?r.removeClass("progress-bar-animated"):r.addClass("progress-bar-animated")}))}(jQuery);

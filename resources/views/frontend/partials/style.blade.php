@@ -1,23 +1,19 @@
-<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
-<!-- Bootstrap core CSS -->
-<link href="{{ asset('frontend') }}/dist/css/bootstrap.min.css" rel="stylesheet">
-<!-- Custom styles for this template -->
-<link href="{{ asset('frontend') }}/carousel.css" rel="stylesheet">
-<link href="{{ asset('frontend') }}/heroes.css" rel="stylesheet">
-<link href="{{ asset('frontend') }}/blog.css" rel="stylesheet">
-<style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
+<!-- FAVICON -->
+<link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend') }}/images/brand/favicon.ico" />
 
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-        }
-    }
-</style>
+<!-- TITLE -->
+<title>Noa - Laravel Bootstrap 5 Admin & Dashboard Template</title>
+
+<!-- BOOTSTRAP CSS -->
+<link id="style" href="{{ asset('frontend') }}/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- STYLE CSS -->
+<link href="{{ asset('frontend') }}/css/style.css" rel="stylesheet"/>
+
+<!--- FONT-ICONS CSS -->
+<link href="{{ asset('frontend') }}/plugins/icons/icons.css" rel="stylesheet"/>
+
+<!-- INTERNAL Switcher css -->
+<link href="{{ asset('frontend') }}/switcher/css/switcher.css" rel="stylesheet" />
+<link href="{{ asset('frontend') }}/switcher/demo.css" rel="stylesheet" />
 @stack('style')

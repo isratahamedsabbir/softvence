@@ -11,14 +11,13 @@ class ContactController extends Controller
 {
     public function store(Request $request)
     {
-        
         $request->validate([
-            'name' => 'required|string|max:50',
-            'email' => 'required|email|max:100|exists:subscribers,email',
-            'subject' => 'required|string|max:100',
-            'message' => 'required|string|max:1000'
+            'name'      => 'required|string|max:50',
+            'email'     => 'required|email|max:100|exists:subscribers,email',
+            'subject'   => 'required|string|max:100',
+            'message'   => 'required|string|max:1000'
         ]);
-        
+
         try {
             Contact::create($request->only('name', 'email', 'subject', 'message'));
         } catch (Exception $e) {

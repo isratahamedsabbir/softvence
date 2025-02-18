@@ -46,7 +46,7 @@ class HomeBannerController extends Controller
                 })
                 ->addColumn('action', function ($data) {
                     return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                <a href="' . route('cms.home.banner.edit', ['id' => $data->id]) . '" type="button" class="btn btn-primary fs-14 text-white edit-icn" title="Edit">
+                                <a href="' . route('admin.cms.home.banner.edit', ['id' => $data->id]) . '" type="button" class="btn btn-primary fs-14 text-white edit-icn" title="Edit">
                                     <i class="fe fe-edit"></i>
                                 </a>
 
@@ -102,7 +102,7 @@ class HomeBannerController extends Controller
             // Create or update the CMS entry
             CMS::create($validatedData);
 
-            return redirect()->route('cms.home.banner.index')->with('t-success', 'Created successfully');
+            return redirect()->route('admin.cms.home.banner.index')->with('t-success', 'Created successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }
@@ -161,7 +161,7 @@ class HomeBannerController extends Controller
 
             // Update the CMS entry with the validated data
             $Review->update($validatedData);
-            return redirect()->route('cms.home.banner.index')->with('t-success', 'Updated successfully');
+            return redirect()->route('admin.cms.home.banner.index')->with('t-success', 'Updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }
@@ -248,7 +248,7 @@ class HomeBannerController extends Controller
                 CMS::create($validatedData);
             }
 
-            return redirect()->route('cms.home.banner.index')->with('t-success', 'Updated successfully');
+            return redirect()->route('admin.cms.home.banner.index')->with('t-success', 'Updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }
