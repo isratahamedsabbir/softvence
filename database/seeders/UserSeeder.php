@@ -23,12 +23,19 @@ class UserSeeder extends Seeder
         ]);
 
         DB::table('roles')->insert([
+            ['name' => 'developer', 'guard_name' => 'web'],
             ['name' => 'admin', 'guard_name' => 'web'],
             ['name' => 'client', 'guard_name' => 'web'],
-            ['name' => 'retailer', 'guard_name' => 'web']
+            ['name' => 'retailer', 'guard_name' => 'web'],
         ]);
 
         DB::table('users')->insert([
+           [
+            'name' => 'developer',
+            'email' => 'developer@developer.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
+           ],
            [
             'name' => 'Admin',
             'email' => 'admin@admin.com',
@@ -71,6 +78,11 @@ class UserSeeder extends Seeder
                 'role_id' => 3,
                 'model_id' => 3,
                 'model_type' => 'App\Models\User'
+            ],
+            [
+                'role_id' => 4,
+                'model_id' => 4,
+                'model_type' => 'App\Models\User'
             ]
         ]);
 
@@ -95,6 +107,26 @@ class UserSeeder extends Seeder
                 'model_id' => 1,
                 'model_type' => 'App\Models\User'
             ],
+            [
+                'permission_id' => 1,
+                'model_id' => 2,
+                'model_type' => 'App\Models\User'
+            ],
+            [
+                'permission_id' => 2,
+                'model_id' => 2,
+                'model_type' => 'App\Models\User'
+            ],
+            [
+                'permission_id' => 3,
+                'model_id' => 2,
+                'model_type' => 'App\Models\User'
+            ],
+            [
+                'permission_id' => 4,
+                'model_id' => 2,
+                'model_type' => 'App\Models\User'
+            ]
         ]);
     }
 }

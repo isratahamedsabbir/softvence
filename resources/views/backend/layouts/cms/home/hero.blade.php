@@ -30,7 +30,7 @@
                         <div class="tab-pane active show" id="editProfile">
                             <div class="card">
                                 <div class="card-body border-0">
-                                    <form method="POST" action="{{ route('cms.home.hero.update') }}" enctype="multipart/form-data">
+                                    <form method="POST" action="{{ route('admin.cms.home.hero.update') }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
 

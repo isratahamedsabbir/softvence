@@ -102,7 +102,7 @@
                 pagingType: "full_numbers",
                 dom: "<'row justify-content-between table-topbar'<'col-md-4 col-sm-3'l><'col-md-5 col-sm-5 px-0'f>>tipr",
                 ajax: {
-                    url: "{{ route('schedule.index') }}",
+                    url: "{{ route('admin.schedule.index') }}",
                     type: "GET",
                 },
 
@@ -168,11 +168,11 @@
 
     //edit
     function rejectSchedule(id) {
-        let url = "{{ route('schedule.reject', ':id') }}";
+        let url = "{{ route('admin.schedule.reject', ':id') }}";
         window.location.href = url.replace(':id', id);
     }
     function goToShow(id) {
-        let url = "{{ route('schedule.show', ':id') }}";
+        let url = "{{ route('admin.schedule.show', ':id') }}";
         window.location.href = url.replace(':id', id);
     }
 </script>

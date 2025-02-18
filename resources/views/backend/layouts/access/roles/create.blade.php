@@ -29,7 +29,7 @@
                         <div class="tab-pane active show" id="editProfile">
                             <div class="card">
                                 <div class="card-body border-0">
-                                    <form action="{{ route('roles.store') }}" method="POST">
+                                    <form action="{{ route('admin.roles.store') }}" method="POST">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="name" class="form-label">Role Name</label>

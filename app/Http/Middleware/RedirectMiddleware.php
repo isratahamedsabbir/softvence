@@ -11,7 +11,9 @@ class RedirectMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::user()->hasRole('admin')) {
+            if (Auth::user()->hasRole('developer')) {
+                return redirect()->intended(route('developer.dashboard', absolute: false));
+            }elseif (Auth::user()->hasRole('admin')) {
                 return redirect()->intended(route('admin.dashboard', absolute: false));
             } elseif (Auth::user()->hasRole('retailer')) {
                 return redirect()->intended(route('retailer.dashboard', absolute: false));

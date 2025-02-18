@@ -28,7 +28,7 @@
                         <div class="tab-pane active show" id="editProfile">
                             <div class="card">
                                 <div class="card-body border-0">
-                                    <form action="{{ route('users.store') }}" method="POST">
+                                    <form action="{{ route('admin.users.store') }}" method="POST">
                                         @csrf
                                         <div class="mb-3">
                                             <label for="name" class="form-label">User Name</label>

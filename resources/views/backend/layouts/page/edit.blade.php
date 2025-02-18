@@ -28,7 +28,7 @@
                         <div class="tab-pane active show" id="editProfile">
                             <div class="card">
                                 <div class="card-body border-0">
-                                    <form class="form-horizontal" method="post" action="{{ route('page.update', $page->id) }}" enctype="multipart/form-data">
+                                    <form class="form-horizontal" method="post" action="{{ route('admin.page.update', $page->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('POST')
                                         <div class="row mb-4">

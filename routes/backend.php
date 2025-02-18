@@ -27,7 +27,7 @@ use App\Http\Controllers\Web\Backend\SubcategoryController;
 use App\Http\Controllers\Web\Backend\SubscriberController;
 use App\Models\Subscriber;
 
-Route::get("dashboard", [DashboardController::class, 'index'])->name('admin.dashboard');
+Route::get("dashboard", [DashboardController::class, 'index'])->name('dashboard');
 
 
 Route::resource('users', UserController::class);
@@ -155,8 +155,8 @@ Route::prefix('cms')->name('cms.')->group(function () {
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::patch('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
-    
         Route::get('/{id}/status', 'status')->name('status');
+        
         Route::put('/content', 'content')->name('content');
     });
 

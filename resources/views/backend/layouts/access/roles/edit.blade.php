@@ -29,7 +29,7 @@
                         <div class="tab-pane active show" id="editProfile">
                             <div class="card">
                                 <div class="card-body border-0">
-                                    <form action="{{ route('roles.update', $role->id) }}" method="POST">
+                                    <form action="{{ route('admin.roles.update', $role->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <div class="mb-3">

@@ -96,7 +96,7 @@
                 pagingType: "full_numbers",
                 dom: "<'row justify-content-between table-topbar'<'col-md-4 col-sm-3'l><'col-md-5 col-sm-5 px-0'f>>tipr",
                 ajax: {
-                    url: "{{ route('subscriber.index') }}",
+                    url: "{{ route('admin.subscriber.index') }}",
                     type: "GET",
                 },
 

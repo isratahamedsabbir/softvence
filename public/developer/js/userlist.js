@@ -1,0 +1,1 @@
+!function(e){"use strict";e("#user-datatable").DataTable({language:{searchPlaceholder:"Search...",sSearch:""},pageLength:25}),e(".select2").select2({minimumResultsForSearch:1/0})}(jQuery);

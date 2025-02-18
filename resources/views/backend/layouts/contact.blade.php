@@ -97,7 +97,7 @@
                 pagingType: "full_numbers",
                 dom: "<'row justify-content-between table-topbar'<'col-md-4 col-sm-3'l><'col-md-5 col-sm-5 px-0'f>>tipr",
                 ajax: {
-                    url: "{{ route('contact.index') }}",
+                    url: "{{ route('admin.contact.index') }}",
                     type: "GET",
                 },
 
@@ -152,7 +152,7 @@
     // Status Change
     function statusChange(id) {
         NProgress.start();
-        let url = "{{ route('contact.status', ':id') }}";
+        let url = "{{ route('admin.contact.status', ':id') }}";
         $.ajax({
             type: "GET",
             url: url.replace(':id', id),

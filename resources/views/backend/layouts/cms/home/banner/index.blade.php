@@ -36,7 +36,7 @@
                 <div class="col-md-5">
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('cms.home.banner.content') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.cms.home.banner.content') }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -124,7 +124,7 @@
                         <div class="card-header d-flex justify-content-between border-bottom">
                             <h3 class="card-title">All Home Banner Items</h3>
                             <!-- Add New Page Button -->
-                            <a href="{{route('cms.home.banner.create')}}" class="btn btn-primary">
+                            <a href="{{route('admin.cms.home.banner.create')}}" class="btn btn-primary">
                                 <i class="bx bx-plus me-sm-1 "></i> Add New
                             </a>
                         </div>
@@ -192,7 +192,7 @@
                 pagingType: "full_numbers",
                 dom: "<'row justify-content-between table-topbar'<'col-md-4 col-sm-3'l><'col-md-5 col-sm-5 px-0'f>>tipr",
                 ajax: {
-                    url: "{{ route('cms.home.banner.index') }}",
+                    url: "{{ route('admin.cms.home.banner.index') }}",
                     type: "GET",
                 },
 
@@ -256,7 +256,7 @@
 
     // Status Change
     function statusChange(id) {
-        let url = "{{ route('cms.home.banner.status', ':id') }}";
+        let url = "{{ route('admin.cms.home.banner.status', ':id') }}";
         $.ajax({
             type: "GET",
             url: url.replace(':id', id),
@@ -299,7 +299,7 @@
 
     // Delete Button
     function deleteItem(id) {
-        let url = "{{ route('cms.home.banner.destroy', ':id') }}";
+        let url = "{{ route('admin.cms.home.banner.destroy', ':id') }}";
         let csrfToken = '{{ csrf_token() }}';
         $.ajax({
             type: "DELETE",

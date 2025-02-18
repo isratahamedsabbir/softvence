@@ -19,9 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::middleware(['web', 'auth', 'admin'])->prefix('admin')->group(base_path('routes/backend.php'));
+            Route::middleware(['web', 'auth', 'admin'])->prefix('admin')->name('admin.')->group(base_path('routes/backend.php'));
             Route::middleware(['web', 'client'])->prefix('client')->name('client.')->group(base_path('routes/client.php'));
             Route::middleware(['web', 'retailer'])->prefix('retailer')->name('retailer.')->group(base_path('routes/retailer.php'));
+            Route::middleware(['web', 'auth', 'developer'])->prefix('developer')->name('developer.')->group(base_path('routes/developer.php'));
         }
     )
     ->withBroadcasting(
@@ -30,6 +31,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
+            'developer' => App\Http\Middleware\DeveloperMiddleware::class,
             'admin' => App\Http\Middleware\AdminMiddleware::class,
             'client' => App\Http\Middleware\CustomerMiddleware::class,
             'retailer' => App\Http\Middleware\RetailerMiddleware::class,

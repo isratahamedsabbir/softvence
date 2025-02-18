@@ -35,7 +35,7 @@
                         <div class="card-header border-bottom">
                             <h3 class="card-title mb-0">Task List</h3>
                             <div class="card-options ms-auto">
-                                <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm">Add Task</a>
+                                <a href="{{ route('admin.roles.create') }}" class="btn btn-primary btn-sm">Add Task</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -60,8 +60,8 @@
                                             <td>{{ \Carbon\Carbon::parse($role->created_at)->format('d-m-Y') }}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-primary"><i class="mdi mdi-pencil"></i></a>
-                                                    <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+                                                    <a href="{{ route('admin.roles.edit', $role->id) }}" class="btn btn-primary"><i class="mdi mdi-pencil"></i></a>
+                                                    <form action="{{ route('admin.roles.destroy', $role->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>

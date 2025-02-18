@@ -28,7 +28,7 @@
                     <h2 class="card-header">Google Settings</h2>
                     <div class="card box-shadow-0">
                         <div class="card-body">
-                            <form method="post" action="{{ route('setting.social.update') }}" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('admin.setting.social.update') }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
 

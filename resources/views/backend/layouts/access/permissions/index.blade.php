@@ -35,7 +35,7 @@
                         <div class="card-header border-bottom">
                             <h3 class="card-title mb-0">Task List</h3>
                             <div class="card-options ms-auto">
-                                <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm">Add Task</a>
+                                <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary btn-sm">Add Task</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -59,8 +59,8 @@
                                             <td>{{ \Carbon\Carbon::parse($permission->created_at)->format('d-m-Y') }}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="{{ route('permissions.edit', $permission->id) }}" class="btn btn-primary"><i class="mdi mdi-pencil"></i></a>
-                                                    <form action="{{ route('permissions.destroy', $permission->id) }}" method="post">
+                                                    <a href="{{ route('admin.permissions.edit', $permission->id) }}" class="btn btn-primary"><i class="mdi mdi-pencil"></i></a>
+                                                    <form action="{{ route('admin.permissions.destroy', $permission->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>

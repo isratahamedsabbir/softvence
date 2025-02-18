@@ -35,7 +35,7 @@
                         <div class="card-header border-bottom">
                             <h3 class="card-title mb-0">Task List</h3>
                             <div class="card-options ms-auto">
-                                <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm">Add Task</a>
+                                <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm">Add Task</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -63,9 +63,9 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group" user="group" aria-label="Basic example">
-                                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary"><i class="mdi mdi-pencil"></i></a>
+                                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary"><i class="mdi mdi-pencil"></i></a>
                                                     @can('delete', $user)
-                                                    <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger"><i class="mdi mdi-delete"></i></button>

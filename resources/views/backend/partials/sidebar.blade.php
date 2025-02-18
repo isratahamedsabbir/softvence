@@ -31,7 +31,7 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{  request()->routeIs('category') ? 'has-link' : '' }}" href="{{ route('category.index') }}">
+                    <a class="side-menu__item {{  request()->routeIs('category') ? 'has-link' : '' }}" href="{{ route('admin.category.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
                             <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
                             <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
@@ -40,7 +40,7 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{  request()->routeIs('subcategory') ? 'has-link' : '' }}" href="{{ route('subcategory.index') }}">
+                    <a class="side-menu__item {{  request()->routeIs('subcategory') ? 'has-link' : '' }}" href="{{ route('admin.subcategory.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
                             <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
                             <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
@@ -49,7 +49,7 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('post.index') }}">
+                    <a class="side-menu__item {{  request()->routeIs('post') ? 'has-link' : '' }}" href="{{ route('admin.post.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
                             <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
                             <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
@@ -61,7 +61,7 @@
                     <h3>Components</h3>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{  request()->routeIs('contact') ? 'has-link' : '' }}" href="{{ route('contact.index') }}">
+                    <a class="side-menu__item {{  request()->routeIs('contact') ? 'has-link' : '' }}" href="{{ route('admin.contact.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
                             <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
                             <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
@@ -70,7 +70,7 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{  request()->routeIs('subscriber') ? 'has-link' : '' }}" href="{{ route('subscriber.index') }}">
+                    <a class="side-menu__item {{  request()->routeIs('subscriber') ? 'has-link' : '' }}" href="{{ route('admin.subscriber.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
                             <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
                             <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
@@ -97,9 +97,9 @@
                     </a>
 
                     <ul class="slide-menu">
-                        <li><a href="{{ route('users.index') }}" class="slide-item">User</a></li>
-                        <li><a href="{{ route('permissions.index') }}" class="slide-item">Permission</a></li>
-                        <li><a href="{{ route('roles.index') }}" class="slide-item">Roll</a></li>
+                        <li><a href="{{ route('admin.users.index') }}" class="slide-item">User</a></li>
+                        <li><a href="{{ route('admin.permissions.index') }}" class="slide-item">Permission</a></li>
+                        <li><a href="{{ route('admin.roles.index') }}" class="slide-item">Roll</a></li>
                     </ul>
                 </li>
                 <li class="slide">
@@ -110,20 +110,20 @@
                         <span class="side-menu__label">Settings</span><i class="angle fa fa-angle-right"></i>
                     </a>
                     <ul class="slide-menu">
-                        <li><a href="{{ route('setting.general.index') }}" class="slide-item">General Settings</a></li>
-                        <li><a href="{{ route('setting.profile.index') }}" class="slide-item">Profile Settings</a></li>
-                        <li><a href="{{ route('setting.mail.index') }}" class="slide-item">Mail Settings</a></li>
-                        <li><a href="{{ route('setting.stripe.index') }}" class="slide-item">Stripe Settings</a></li>
-                        <li><a href="{{ route('setting.firebase.index') }}" class="slide-item">Firebase Settings</a></li>
-                        <li><a href="{{ route('setting.social.index') }}" class="slide-item">Social Settings</a></li>
-                        <li><a href="{{ route('setting.google.map.index') }}" class="slide-item">Google Map Settings</a></li>
+                        <li><a href="{{ route('admin.setting.general.index') }}" class="slide-item">General Settings</a></li>
+                        <li><a href="{{ route('admin.setting.profile.index') }}" class="slide-item">Profile Settings</a></li>
+                        <li><a href="{{ route('admin.setting.mail.index') }}" class="slide-item">Mail Settings</a></li>
+                        <li><a href="{{ route('admin.setting.stripe.index') }}" class="slide-item">Stripe Settings</a></li>
+                        <li><a href="{{ route('admin.setting.firebase.index') }}" class="slide-item">Firebase Settings</a></li>
+                        <li><a href="{{ route('admin.setting.social.index') }}" class="slide-item">Social Settings</a></li>
+                        <li><a href="{{ route('admin.setting.google.map.index') }}" class="slide-item">Google Map Settings</a></li>
                     </ul>
                 </li>
                 <li>
                     <h3>CMS</h3>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{  request()->routeIs('page') ? 'has-link' : '' }}" href="{{ route('page.index') }}">
+                    <a class="side-menu__item {{  request()->routeIs('page') ? 'has-link' : '' }}" href="{{ route('admin.page.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
                             <path d="M15 14l-5-5-5 5v-3l10 -10z" />
                         </svg>
@@ -131,7 +131,7 @@
                     </a>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item {{  request()->routeIs('social') ? 'has-link' : '' }}" href="{{ route('social.index') }}">
+                    <a class="side-menu__item {{  request()->routeIs('social') ? 'has-link' : '' }}" href="{{ route('admin.social.index') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
                             <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
                             <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
@@ -149,7 +149,7 @@
                     </a>
 
                     <ul class="slide-menu">
-                        <li><a href="{{ route('cms.page.auth.section.bg.index') }}" class="slide-item">Auth Page</a></li>
+                        <li><a href="{{ route('admin.cms.page.auth.section.bg.index') }}" class="slide-item">Auth Page</a></li>
                     </ul>
                 </li>
                 <li class="slide">
@@ -162,48 +162,9 @@
                     </a>
 
                     <ul class="slide-menu">
-                        <li><a href="{{ route('cms.home.banner.index') }}" class="slide-item">Banner Section</a></li>
-                        <li><a href="{{ route('cms.home.hero.index') }}" class="slide-item">Hero Section</a></li>
+                        <li><a href="{{ route('admin.cms.home.banner.index') }}" class="slide-item">Banner Section</a></li>
+                        <li><a href="{{ route('admin.cms.home.hero.index') }}" class="slide-item">Hero Section</a></li>
                     </ul>
-                </li>
-                <li>
-                    <h3>Test</h3>
-                </li>
-                <li class="slide">
-                    <a class="side-menu__item" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
-                            <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
-                            <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
-                        </svg>
-                        <span class="side-menu__label">Firebase</span>
-                    </a>
-                </li>
-                <li class="slide">
-                    <a class="side-menu__item" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
-                            <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
-                            <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
-                        </svg>
-                        <span class="side-menu__label">Notification</span>
-                    </a>
-                </li>
-                <li class="slide">
-                    <a class="side-menu__item" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
-                            <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
-                            <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
-                        </svg>
-                        <span class="side-menu__label">SMS</span>
-                    </a>
-                </li>
-                <li class="slide">
-                    <a class="side-menu__item" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="side-menu__icon" viewBox="0 0 16 16">
-                            <path d="M3.5 11a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm3.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm4.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z" />
-                            <path d="M14 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zM2 14h12a1 1 0 0 0 1-1V5H1v8a1 1 0 0 0 1 1M2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1z" />
-                        </svg>
-                        <span class="side-menu__label">Email</span>
-                    </a>
                 </li>
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg"

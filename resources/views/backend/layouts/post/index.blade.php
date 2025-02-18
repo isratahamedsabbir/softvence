@@ -35,7 +35,7 @@
                         <div class="card-header border-bottom">
                             <h3 class="card-title mb-0">Task List</h3>
                             <div class="card-options ms-auto">
-                                <a href="{{ route('post.create') }}" class="btn btn-primary btn-sm">Add Task</a>
+                                <a href="{{ route('admin.post.create') }}" class="btn btn-primary btn-sm">Add Task</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -102,7 +102,7 @@
                 pagingType: "full_numbers",
                 dom: "<'row justify-content-between table-topbar'<'col-md-4 col-sm-3'l><'col-md-5 col-sm-5 px-0'f>>tipr",
                 ajax: {
-                    url: "{{ route('post.index') }}",
+                    url: "{{ route('admin.post.index') }}",
                     type: "GET",
                 },
 
@@ -169,7 +169,7 @@
     // Status Change
     function statusChange(id) {
         NProgress.start();
-        let url = "{{ route('post.status', ':id') }}";
+        let url = "{{ route('admin.post.status', ':id') }}";
         $.ajax({
             type: "GET",
             url: url.replace(':id', id),
@@ -206,7 +206,7 @@
     // Delete Button
     function deleteItem(id) {
         NProgress.start();
-        let url = "{{ route('post.destroy', ':id') }}";
+        let url = "{{ route('admin.post.destroy', ':id') }}";
         let csrfToken = '{{ csrf_token() }}';
         $.ajax({
             type: "DELETE",
@@ -228,11 +228,11 @@
 
     //edit
     function goToEdit(id) {
-        let url = "{{ route('post.edit', ':id') }}";
+        let url = "{{ route('admin.post.edit', ':id') }}";
         window.location.href = url.replace(':id', id);
     }
     function goToOpen(id) {
-        let url = "{{ route('post.single', ':id') }}";
+        let url = "{{ route('admin.post.single', ':id') }}";
         window.location.href = url.replace(':id', id);
     }
 </script>

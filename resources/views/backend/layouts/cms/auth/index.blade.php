@@ -28,7 +28,7 @@
                 <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
                     <div class="card box-shadow-0">
                         <div class="card-body">
-                            <form class="form-horizontal" method="post" action="{{ route('cms.page.auth.section.bg.update') }}" enctype="multipart/form-data">
+                            <form class="form-horizontal" method="post" action="{{ route('admin.cms.page.auth.section.bg.update') }}" enctype="multipart/form-data">
                                 @csrf
                                 @method('PATCH')
 
