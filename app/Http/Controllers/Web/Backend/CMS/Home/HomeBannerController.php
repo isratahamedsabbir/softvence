@@ -18,6 +18,7 @@ class HomeBannerController extends Controller
     public $section = "banner";
     public $item = SectionEnum::HOME_BANNER;
     public $items = SectionEnum::HOME_BANNERS;
+    public $count = 3;
     /**
      * Display a listing of the resource.
      */
@@ -100,7 +101,7 @@ class HomeBannerController extends Controller
             $validatedData['section'] = $this->items->value;
 
             $counting = CMS::where('page', $validatedData['page'])->where('section', $validatedData['section'])->count(); 
-            if ($counting >= 3) {
+            if ($counting >= $this->count) {
                 return redirect()->back()->with('t-error', 'Maximum 3 Item You Can Add');
             }
 
