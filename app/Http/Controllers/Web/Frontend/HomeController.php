@@ -12,7 +12,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $cms = CMS::where('page', PageEnum::HOME)->where('status', 'active')->get();
+        $cms = [
+            'home' => CMS::where('page', PageEnum::HOME)->where('status', 'active')->get(),
+            'common' => CMS::where('page', PageEnum::COMMON)->where('status', 'active')->get(),
+        ];
         $posts = Post::where('status', 'active')->get();
         return view('frontend.layouts.index', compact('posts', 'cms'));
     }

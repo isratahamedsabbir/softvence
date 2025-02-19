@@ -1,9 +1,9 @@
 @php
 use App\Enums\PageEnum;
 use App\Enums\SectionEnum;
-$cms_banner = $cms->firstWhere('section', SectionEnum::HOME_BANNER);
-$cms_banners = $cms->where('section', SectionEnum::HOME_BANNERS)->values();
-$cms_hero = $cms->firstWhere('section', SectionEnum::HERO);
+$cms_banner = $cms['home']->firstWhere('section', SectionEnum::HOME_BANNER);
+$cms_banners = $cms['home']->where('section', SectionEnum::HOME_BANNERS)->values();
+$cms_hero = $cms['home']->firstWhere('section', SectionEnum::HERO);
 @endphp
 
 @extends('frontend.app', ['title' => 'landing page'])
