@@ -11,14 +11,23 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use App\Http\Requests\CmsRequest;
+use App\Services\CmsService;
 
 class HomeBannerController extends Controller
 {
+    protected $cmsService;
+
     public $page = PageEnum::HOME;
     public $section = "banner";
     public $item = SectionEnum::HOME_BANNER;
     public $items = SectionEnum::HOME_BANNERS;
     public $count = 3;
+
+    public function __construct(CmsService $cmsService)
+    {
+        $this->cmsService = $cmsService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -79,21 +88,9 @@ class HomeBannerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CmsRequest $request)
     {
-        $validatedData = $request->validate([
-            'name'              => 'nullable|string|max:50',
-            'title'             => 'nullable|string|max:255',
-            'sub_title'         => 'nullable|string|max:255',
-            'description'       => 'nullable|string',
-            'sub_description'   => 'nullable|string',
-            'bg'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'image'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'btn_text'          => 'nullable|string|max:50',
-            'btn_link'          => 'nullable|string|max:100',
-            'btn_color'         => 'nullable|string|max:50',
-            'rating'            => 'nullable|integer|min:1|max:5'
-        ]);
+        $validatedData = $request->validated();
 
         try {
             // Add the page and section to validated data
@@ -102,7 +99,7 @@ class HomeBannerController extends Controller
 
             $counting = CMS::where('page', $validatedData['page'])->where('section', $validatedData['section'])->count(); 
             if ($counting >= $this->count) {
-                return redirect()->back()->with('t-error', 'Maximum 3 Item You Can Add');
+                return redirect()->back()->with('t-error', "Maximum  {$this->count} Item You Can Add");
             }
 
             if ($request->hasFile('bg')) {
@@ -149,41 +146,29 @@ class HomeBannerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(CmsRequest $request, $id)
     {
-        $validatedData = $request->validate([
-            'name'              => 'nullable|string|max:50',
-            'title'             => 'nullable|string|max:255',
-            'sub_title'         => 'nullable|string|max:255',
-            'description'       => 'nullable|string',
-            'sub_description'   => 'nullable|string',
-            'bg'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'image'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'btn_text'          => 'nullable|string|max:50',
-            'btn_link'          => 'nullable|string|max:100',
-            'btn_color'         => 'nullable|string|max:50',
-            'rating'            => 'nullable|integer|min:1|max:5'
-        ]);
+        $validatedData = $request->validated();
 
         try {
             // Find the existing CMS record by ID
-            $Review = CMS::findOrFail($id);
+            $section = CMS::findOrFail($id);
 
             // Update the page and section if necessary
             $validatedData['page'] = $this->page->value;
             $validatedData['section'] = $this->items->value;
 
             if($request->hasFile('bg')) {
-                if ($Review->bg && file_exists(public_path($Review->bg))) {
-                    Helper::fileDelete(public_path($Review->bg));
+                if ($section->bg && file_exists(public_path($section->bg))) {
+                    Helper::fileDelete(public_path($section->bg));
                 }
                 $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
             }
 
             
             if ($request->hasFile('image')) {
-                if ($Review->image && file_exists(public_path($Review->image))) {
-                    Helper::fileDelete(public_path($Review->image));
+                if ($section->image && file_exists(public_path($section->image))) {
+                    Helper::fileDelete(public_path($section->image));
                 }
                 $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
             }
@@ -195,7 +180,7 @@ class HomeBannerController extends Controller
             }
 
             // Update the CMS entry with the validated data
-            $Review->update($validatedData);
+            $section->update($validatedData);
 
             return redirect()->route("admin.cms.home.{$this->section}.index")->with('t-success', 'Updated successfully');
         } catch (Exception $e) {
@@ -210,18 +195,7 @@ class HomeBannerController extends Controller
     public function destroy(string $id)
     {
         try {
-            // Find the CMS entry by ID
-            $data = CMS::findOrFail($id);
-
-            if ($data->bg && file_exists(public_path($data->bg))) {
-                Helper::fileDelete(public_path($data->bg));
-            }
-
-            if ($data->image && file_exists(public_path($data->image))) {
-                Helper::fileDelete(public_path($data->image));
-            }
-
-            $data->delete();
+            $this->cmsService->destroy($id);
 
             return response()->json([
                 't-success' => true,
@@ -237,88 +211,50 @@ class HomeBannerController extends Controller
 
     public function status(int $id): JsonResponse
     {
-        // Find the CMS entry by ID
-        $data = CMS::findOrFail($id);
-
-        // Check if the record was found
-        if (!$data) {
+        try {
+            $this->cmsService->status($id);
             return response()->json([
-                "success" => false,
-                "message" => "Item not found.",
-                "data" => $data,
+                't-success' => true,
+                'message' => 'Updated successfully.',
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                't-success' => false,
+                'message' => $e->getMessage(),
             ]);
         }
-
-        // Toggle the status
-        $data->status = $data->status === 'active' ? 'inactive' : 'active';
-
-        // Save the changes
-        $data->save();
-
-        return response()->json([
-            't-success' => true,
-            'message' => 'Item status changed successfully.',
-            'data'    => $data,
-        ]);
     }
 
-    public function content(Request $request)
+    public function content(CmsRequest $request)
     {
-        $validatedData = request()->validate([
-            'name'              => 'nullable|string|max:50',
-            'title'             => 'nullable|string|max:255',
-            'sub_title'         => 'nullable|string|max:255',
-            'description'       => 'nullable|string',
-            'sub_description'   => 'nullable|string',
-            'bg'                => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'image'             => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-            'btn_text'          => 'nullable|string|max:50',
-            'btn_link'          => 'nullable|string|max:100',
-            'btn_color'         => 'nullable|string|max:50',
-            'rating'            => 'nullable|integer|min:1|max:5'
-        ]);
+        $validatedData = $request->validated();
         try {
             $validatedData['page'] = $this->page;
             $validatedData['section'] = $this->item;
             $section = CMS::where('page', $this->page)->where('section', $this->item)->first();
+
+            if($request->hasFile('bg')) {
+                if ($section && $section->bg && file_exists(public_path($section->bg))) {
+                    Helper::fileDelete(public_path($section->bg));
+                }
+                $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
+            }
+
+            if ($request->hasFile('image')) {
+                if ($section && $section->image && file_exists(public_path($section->image))) {
+                    Helper::fileDelete(public_path($section->image));
+                }
+                $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
+            }
+
+            if($request->has('rating')) {
+                $validatedData['metadata']['rating'] = $validatedData['rating'];
+                unset($validatedData['rating']);
+            }
+
             if ($section) {
-                
-                if($request->hasFile('bg')) {
-                    if ($section->bg && file_exists(public_path($section->bg))) {
-                        Helper::fileDelete(public_path($section->bg));
-                    }
-                    $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
-                }
-    
-                if ($request->hasFile('image')) {
-                    
-                    if ($section->image && file_exists(public_path($section->image))) {
-                        Helper::fileDelete(public_path($section->image));
-                    }
-                    $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
-                }
-
-                if($request->has('rating')) {
-                    $validatedData['metadata']['rating'] = $validatedData['rating'];
-                    unset($validatedData['rating']);
-                }
-
                 CMS::where('page', $validatedData['page'])->where('section', $validatedData['section'])->update($validatedData);
             } else {
-                
-                if ($request->hasFile('bg')) {
-                    $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
-                }
-                
-                if ($request->hasFile('image')) {
-                    $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
-                }
-
-                if($request->has('rating')) {
-                    $validatedData['metadata']['rating'] = $validatedData['rating'];
-                    unset($validatedData['rating']);
-                }
-
                 CMS::create($validatedData);
             }
 

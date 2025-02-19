@@ -231,44 +231,29 @@ class CmsController extends Controller
             $validatedData['page'] = $this->page;
             $validatedData['section'] = $this->item;
             $section = CMS::where('page', $this->page)->where('section', $this->item)->first();
+
+            if($request->hasFile('bg')) {
+                if ($section && $section->bg && file_exists(public_path($section->bg))) {
+                    Helper::fileDelete(public_path($section->bg));
+                }
+                $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
+            }
+
+            if ($request->hasFile('image')) {
+                if ($section && $section->image && file_exists(public_path($section->image))) {
+                    Helper::fileDelete(public_path($section->image));
+                }
+                $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
+            }
+
+            if($request->has('rating')) {
+                $validatedData['metadata']['rating'] = $validatedData['rating'];
+                unset($validatedData['rating']);
+            }
+
             if ($section) {
-                
-                if($request->hasFile('bg')) {
-                    if ($section->bg && file_exists(public_path($section->bg))) {
-                        Helper::fileDelete(public_path($section->bg));
-                    }
-                    $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
-                }
-    
-                if ($request->hasFile('image')) {
-                    
-                    if ($section->image && file_exists(public_path($section->image))) {
-                        Helper::fileDelete(public_path($section->image));
-                    }
-                    $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
-                }
-
-                if($request->has('rating')) {
-                    $validatedData['metadata']['rating'] = $validatedData['rating'];
-                    unset($validatedData['rating']);
-                }
-
                 CMS::where('page', $validatedData['page'])->where('section', $validatedData['section'])->update($validatedData);
             } else {
-                
-                if ($request->hasFile('bg')) {
-                    $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
-                }
-                
-                if ($request->hasFile('image')) {
-                    $validatedData['image'] = Helper::fileUpload($request->file('image'), $this->section, time() . '_' . getFileName($request->file('image')));
-                }
-
-                if($request->has('rating')) {
-                    $validatedData['metadata']['rating'] = $validatedData['rating'];
-                    unset($validatedData['rating']);
-                }
-
                 CMS::create($validatedData);
             }
 
