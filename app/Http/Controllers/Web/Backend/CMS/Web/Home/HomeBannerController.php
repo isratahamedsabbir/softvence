@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Backend\CMS\Home;
+namespace App\Http\Controllers\Web\Backend\CMS\Web\Home;
 
 use App\Http\Controllers\Controller;
 use App\Enums\PageEnum;

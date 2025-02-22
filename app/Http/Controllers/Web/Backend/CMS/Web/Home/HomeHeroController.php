@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Backend\CMS;
+namespace App\Http\Controllers\Web\Backend\CMS\Web\Home;
 
 use App\Http\Controllers\Controller;
 use App\Enums\PageEnum;
@@ -14,13 +14,13 @@ use Yajra\DataTables\DataTables;
 use App\Http\Requests\CmsRequest;
 use App\Services\CmsService;
 
-class AuthPageController extends Controller
+class HomeHeroController extends Controller
 {
     protected $cmsService;
 
-    public $page = PageEnum::AUTH;
-    public $section = "auth";
-    public $item = SectionEnum::BG;
+    public $page = PageEnum::HOME;
+    public $section = "hero";
+    public $item = SectionEnum::HERO;
 
     public function __construct(CmsService $cmsService)
     {
@@ -32,7 +32,7 @@ class AuthPageController extends Controller
     public function index(Request $request)
     {
         $section = CMS::where('page', $this->page)->where('section', $this->item)->latest()->first();
-        return view("backend.layouts.cms.{$this->section}.index", compact('section'));
+        return view("backend.layouts.cms.home.{$this->section}", compact('section'));
     }
 
     public function content(CmsRequest $request)
@@ -68,7 +68,7 @@ class AuthPageController extends Controller
                 CMS::create($validatedData);
             }
 
-            return redirect()->route("admin.cms.page.{$this->section}.index")->with('t-success', 'Updated successfully');
+            return redirect()->route("admin.cms.home.{$this->section}.index")->with('t-success', 'Updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }

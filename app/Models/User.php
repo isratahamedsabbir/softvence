@@ -15,6 +15,8 @@ class User extends Authenticatable implements JWTSubject
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles, SoftDeletes;
 
+    protected $guard_name = 'api';
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

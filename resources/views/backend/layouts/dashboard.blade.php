@@ -108,7 +108,18 @@
                 </div>
             </div>
             <!-- ROW-1 END-->
-
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-6 col-xl-12">
+                    <div class="card">
+                        <div class="card-header border-bottom">
+                            <h3 class="card-title">Sales</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- ROW-2 -->
             <!-- <div class="row">
                 <div class="col-sm-12 col-md-12 col-xl-4 col-lg-6">
@@ -982,7 +993,7 @@
 
 @push('scripts')
 <script>
-   /* document.addEventListener('DOMContentLoaded', function() {
+    /* document.addEventListener('DOMContentLoaded', function() {
 
         Echo.private('chat.1').listen('MessageSent', (e) => {
             console.log('Message Receiver:', e.message);
@@ -1006,5 +1017,74 @@
         });
 
     }); */
+</script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.36.3/dist/apexcharts.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        try {
+            const response = await fetch('/transactions.json');
+            const transactionData = await response.json();
+
+            const categories = Object.keys(transactionData).map(month => month.charAt(0).toUpperCase() + month.slice(1));
+            const seriesData = Object.values(transactionData).map(value => parseFloat(value));
+
+            const options = {
+                series: [{
+                    name: "Transactions",
+                    data: seriesData
+                }],
+                chart: {
+                    height: 400,
+                    type: 'line',
+                    zoom: {
+                        enabled: false
+                    },
+                    toolbar: {
+                        show: true
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    style: {
+                        colors: ['#304758']
+                    }
+                },
+                stroke: {
+                    curve: 'smooth',
+                    width: 2
+                },
+                title: {
+                    text: 'Monthly Transactions Overview',
+                    align: 'center',
+                    style: {
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                        color: '#333'
+                    }
+                },
+                grid: {
+                    borderColor: '#e7e7e7',
+                    row: {
+                        colors: ['#f3f3f3', 'transparent'],
+                        opacity: 0.5
+                    }
+                },
+                xaxis: {
+                    categories: categories,
+                    labels: {
+                        style: {
+                            colors: '#777',
+                        }
+                    }
+                }
+            };
+
+            const chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+
+        } catch (error) {
+            console.error('Error fetching or processing JSON data:', error);
+        }
+    });
 </script>
 @endpush
