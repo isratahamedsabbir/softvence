@@ -17,19 +17,32 @@ class DashboardController extends Controller
     {
 
         $all_months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-        $transaction = Transaction::select(DB::raw("MONTHNAME(created_at) as month"), DB::raw('SUM(amount) as total'))
+
+        $transactions = Transaction::select(
+            DB::raw("MONTHNAME(created_at) as month"),
+            DB::raw("SUM(CASE WHEN type = 'increment' THEN amount ELSE 0 END) as increment_total"),
+            DB::raw("SUM(CASE WHEN type = 'decrement' THEN amount ELSE 0 END) as decrement_total")
+        )
             ->where('status', 'success')
             ->groupBy('month')
             ->get()
             ->mapWithKeys(function ($item) {
-                return [strtolower($item->month) => number_format($item->total, 2)];
+                return [
+                    strtolower($item->month) => [
+                        'increment' => number_format($item->increment_total, 2),
+                        'decrement' => number_format($item->decrement_total, 2)
+                    ]
+                ];
             });
-        $transaction = collect($all_months)->mapWithKeys(function ($month) use ($transaction) {
-            return [$month => $transaction->get($month, '0.00')];
+
+        $formatted_data = collect($all_months)->mapWithKeys(function ($month) use ($transactions) {
+            return [
+                $month => $transactions->get($month, ['increment' => '0.00', 'decrement' => '0.00'])
+            ];
         });
-        if (file_exists(public_path('transactions.json'))){
-            $transaction_json = $transaction->toJson();
-            file_put_contents(public_path('transactions.json'), $transaction_json);
+
+        if (file_exists(public_path('transactions.json'))) {
+            file_put_contents(public_path('transactions.json'), $formatted_data->toJson());
         }
 
         return view('backend.layouts.dashboard');

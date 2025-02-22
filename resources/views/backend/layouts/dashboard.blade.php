@@ -1025,14 +1025,31 @@
             const response = await fetch('/transactions.json');
             const transactionData = await response.json();
 
-            const categories = Object.keys(transactionData).map(month => month.charAt(0).toUpperCase() + month.slice(1));
-            const seriesData = Object.values(transactionData).map(value => parseFloat(value));
+            const categories = Object.keys(transactionData).map(month => 
+                month.charAt(0).toUpperCase() + month.slice(1)
+            );
+            
+            const incrementData = Object.values(transactionData).map(value => 
+                parseFloat(value.increment)
+            );
+            
+            const decrementData = Object.values(transactionData).map(value => 
+                parseFloat(value.decrement)
+            );
 
             const options = {
-                series: [{
-                    name: "Transactions",
-                    data: seriesData
-                }],
+                series: [
+                    {
+                        name: "Increment",
+                        data: incrementData,
+                        color: '#00E396' // Green color
+                    },
+                    {
+                        name: "Decrement",
+                        data: decrementData,
+                        color: '#FF4560' // Red color
+                    }
+                ],
                 chart: {
                     height: 400,
                     type: 'line',
@@ -1076,6 +1093,13 @@
                             colors: '#777',
                         }
                     }
+                },
+                legend: {
+                    position: 'top',
+                    horizontalAlign: 'right',
+                    floating: true,
+                    offsetY: -25,
+                    offsetX: -5
                 }
             };
 

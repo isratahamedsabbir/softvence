@@ -28,7 +28,7 @@ class TransactionSeeder extends Seeder
                 "trx_id" => "trx-456",
                 "type" => "decrement",
                 "title" => "Withdraw",
-                "amount" => 500,
+                "amount" => 1000,
                 "status" => "success",
                 "created_at" => now()->subDays(1),
             ],
@@ -46,7 +46,7 @@ class TransactionSeeder extends Seeder
                 "trx_id" => "trx-1011",
                 "type" => "increment",
                 "title" => "Withdraw",
-                "amount" => 15000,
+                "amount" => 5000,
                 "status" => "success",
                 "created_at" => now()->subDays(1),
             ]
