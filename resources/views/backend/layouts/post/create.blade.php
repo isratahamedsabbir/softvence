@@ -48,7 +48,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="content" class="form-label">Content:</label>
-                                                        <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="description" placeholder="Enter here content" rows="3">{{ $hero->content ?? '' }}</textarea>
+                                                        <textarea class="form-control @error('content') is-invalid @enderror description" name="content" id="description" placeholder="Enter here content" rows="3">{{ $hero->content ?? '' }}</textarea>
                                                         @error('content')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
