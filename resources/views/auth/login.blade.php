@@ -38,6 +38,17 @@
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
+                <div class="bi-login-input-wrapper save">
+                    {!! htmlFormSnippet() !!}
+                    @if ($errors->has('g-recaptcha-response'))
+                    <div>
+                        <small class="text-danger">
+                            {{ $errors->first('g-recaptcha-response') }}
+                        </small>
+                    </div>
+                    @endif
+                </div>
+
                 <div class="text-end pt-1">
                     <p class="mb-0"><a href="{{ route('password.request') }}" class="text-primary ms-1">Forgot Password?</a></p>
                 </div>

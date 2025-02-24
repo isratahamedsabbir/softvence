@@ -49,7 +49,7 @@ $cms_hero = $cms['home']->firstWhere('section', SectionEnum::HERO);
         @endforeach
         @else
         @for ($i = 1; $i <= 4; $i++)
-        <div class="col-lg-3 col-sm-6 d-flex align-items-center">
+            <div class="col-lg-3 col-sm-6 d-flex align-items-center">
             <div class="card shadow-sm border-0 overflow-hidden w-100">
                 <div class="card-body d-flex align-items-center p-3">
                     <a href="#" class="d-block w-100 h-100">
@@ -61,10 +61,10 @@ $cms_hero = $cms['home']->firstWhere('section', SectionEnum::HERO);
                     </div>
                 </div>
             </div>
-        </div>
-        @endfor
-        @endif
     </div>
+    @endfor
+    @endif
+</div>
 </div>
 <!--heeder end-->
 
