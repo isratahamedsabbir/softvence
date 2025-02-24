@@ -64,7 +64,7 @@
                     <p class="mb-0"><a href="{{ route('login') }}" class="text-primary ms-1">login here</a></p>
                 </div>
 
-                <div class="bi-login-input-wrapper save">
+                <div class="bi-login-input-wrapper save mt-3 mb-3">
                     {!! htmlFormSnippet() !!}
                     @if ($errors->has('g-recaptcha-response'))
                         <div>
