@@ -575,7 +575,7 @@
                 <div class="col-12 col-sm-12">
                     <div class="card product-sales-main">
                         <div class="card-header border-bottom">
-                            <h3 class="card-title mb-0">Task List</h3>
+                            <h3 class="card-title mb-0">List</h3>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
