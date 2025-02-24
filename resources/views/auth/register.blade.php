@@ -60,6 +60,10 @@
                 <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
+                <div class="text-end pt-1">
+                    <p class="mb-0"><a href="{{ route('login') }}" class="text-primary ms-1">login here</a></p>
+                </div>
+
                 <div class="bi-login-input-wrapper save">
                     {!! htmlFormSnippet() !!}
                     @if ($errors->has('g-recaptcha-response'))
@@ -69,10 +73,6 @@
                             </small>
                         </div>
                     @endif
-                </div>
-
-                <div class="text-end pt-1">
-                    <p class="mb-0"><a href="{{ route('login') }}" class="text-primary ms-1">login here</a></p>
                 </div>
 
                 <div class="container-login100-form-btn">
