@@ -41,11 +41,11 @@
                 <div class="bi-login-input-wrapper save">
                     {!! htmlFormSnippet() !!}
                     @if ($errors->has('g-recaptcha-response'))
-                    <div>
-                        <small class="text-danger">
-                            {{ $errors->first('g-recaptcha-response') }}
-                        </small>
-                    </div>
+                        <div>
+                            <small class="text-danger">
+                                {{ $errors->first('g-recaptcha-response') }}
+                            </small>
+                        </div>
                     @endif
                 </div>
 
