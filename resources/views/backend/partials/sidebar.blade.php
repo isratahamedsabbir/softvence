@@ -117,6 +117,7 @@
                         <li><a href="{{ route('admin.setting.firebase.index') }}" class="slide-item">Firebase Settings</a></li>
                         <li><a href="{{ route('admin.setting.social.index') }}" class="slide-item">Social Settings</a></li>
                         <li><a href="{{ route('admin.setting.google.map.index') }}" class="slide-item">Google Map Settings</a></li>
+                        <li><a href="{{ route('admin.setting.captcha.index') }}" class="slide-item">Captcha Settings</a></li>
                     </ul>
                 </li>
                 <li>

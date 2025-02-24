@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Backend\DashboardController;
 use App\Http\Controllers\Web\Backend\PageController;
 use App\Http\Controllers\Web\Backend\PostController;
+use App\Http\Controllers\Web\Backend\Settings\CaptchaController;
 use App\Http\Controllers\Web\Backend\SocialLinkController;
 use App\Http\Controllers\Web\Backend\SubcategoryController;
 use App\Http\Controllers\Web\Backend\SubscriberController;
@@ -135,6 +136,12 @@ Route::controller(SettingController::class)->group(function () {
 Route::controller(GoogleMapController::class)->group(function () {
     Route::get('setting/google/map', 'index')->name('setting.google.map.index');
     Route::patch('setting/google/map', 'update')->name('setting.google.map.update');
+});
+
+//! Route for Google Map Settings
+Route::controller(CaptchaController::class)->group(function () {
+    Route::get('setting/captcha', 'index')->name('setting.captcha.index');
+    Route::patch('setting/captcha', 'update')->name('setting.captcha.update');
 });
 
 //CMS
