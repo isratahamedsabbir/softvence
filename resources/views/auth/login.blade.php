@@ -42,6 +42,7 @@
                     <p class="mb-0"><a href="{{ route('password.request') }}" class="text-primary ms-1">Forgot Password?</a></p>
                 </div>
                 
+                @if(env('RECAPTCHA_ENABLE') === 'true')
                 <div class="bi-login-input-wrapper save mt-3 mb-1">
                     {!! htmlFormSnippet() !!}
                     @if ($errors->has('g-recaptcha-response'))
@@ -52,6 +53,7 @@
                         </div>
                     @endif
                 </div>
+                @endif
 
                 <div class="container-login100-form-btn">
                     <button type="submit" class="login100-form-btn btn-primary">
