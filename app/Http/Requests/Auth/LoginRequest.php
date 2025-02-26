@@ -26,11 +26,15 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $data = [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
-            'g-recaptcha-response' => ['required', 'recaptcha']
         ];
+        if (env('RECAPTCHA_ENABLE') === 'true')
+        {
+            $data['g-recaptcha-response'] = ['required', 'recaptcha'];
+        }
+        return $data;
     }
 
     /**
