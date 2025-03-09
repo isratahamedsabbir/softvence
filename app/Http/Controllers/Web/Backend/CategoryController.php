@@ -2,23 +2,31 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
-use App\Helpers\Helper;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
+use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Facades\DataTables;
 
 class CategoryController extends Controller
 {
+
+    private $productRepositoryInterface;
+
+    public function __construct(CategoryRepositoryInterface $productRepositoryInterface)
+    {
+        $this->productRepositoryInterface = $productRepositoryInterface;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Category::all();
+            $data = $this->productRepositoryInterface->all();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('image', function ($data) {
@@ -71,28 +79,19 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        $validate = $request->validate([
-            'name' => 'required|unique:categories,name',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $validatedData = $request->validated();
 
         try {
-            if ($request->hasFile('image')) {
-                $validate['image'] = Helper::fileUpload($request->file('image'), 'category', time() . '_' . getFileName($request->file('image')));
-            }
-            $validate['slug'] = Helper::makeSlug(Category::class, $validate['name']);
-
-            Category::create($validate);
-
+            $this->productRepositoryInterface->create($validatedData);
             session()->put('t-success', 'Category created successfully');
            
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('category.index')->with('t-success', 'Category created successfully');
+        return redirect()->route('admin.category.index')->with('t-success', 'Category created successfully');
     }
 
     /**
@@ -100,7 +99,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category, $id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->productRepositoryInterface->find($id);
         return view('backend.layouts.category.edit', compact('category'));
     }
 
@@ -109,37 +108,25 @@ class CategoryController extends Controller
      */
     public function edit(Category $category, $id)
     {
-        $category = Category::findOrFail($id);
+        $category = $this->productRepositoryInterface->find($id);
         return view('backend.layouts.category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $validate = $request->validate([
-            'name' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        $validatedData = $request->validated();
 
         try {
-            $category = Category::findOrFail($id);
-
-            if ($request->hasFile('image')) {
-                if ($category->image && file_exists(public_path($category->image))) {
-                    Helper::fileDelete(public_path($category->image));
-                }
-                $validate['image'] = Helper::fileUpload($request->file('image'), 'category', time() . '_' . getFileName($request->file('image')));
-            }
-
-            $category->update($validate);
+            $this->productRepositoryInterface->update($id, $validatedData);
             session()->put('t-success', 'Category updated successfully');
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('category.index');
+        return redirect()->route('admin.category.index');
     }
 
     /**
@@ -148,38 +135,33 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $data = Category::findOrFail($id);
-            if ($data->image && file_exists(public_path($data->image))) {
-                Helper::fileDelete(public_path($data->image));
-            }
-            $data->delete();
+            $this->productRepositoryInterface->delete($id);
             return response()->json([
                 'status' => 't-success',
                 'message' => 'Your action was successful!'
             ]);
-            
         } catch (Exception $e) {
             return response()->json([
                 'status' => 't-error',
-                'message' => 'Your action was successful!'
+                'message' => $e->getMessage(),
             ]);
         }
     }
 
     public function status(int $id): JsonResponse
     {
-        $data = Category::findOrFail($id);
-        if (!$data) {
+        try {
+            $this->productRepositoryInterface->status($id);
+            return response()->json([
+                'status' => 't-success',
+                'message' => 'Your action was successful!',
+            ]);
+        } catch (Exception $e) {
             return response()->json([
                 'status' => 't-error',
-                'message' => 'Item not found.',
+                'message' => $e->getMessage(),
             ]);
-        }
-        $data->status = $data->status === 'active' ? 'inactive' : 'active';
-        $data->save();
-        return response()->json([
-            'status' => 't-success',
-            'message' => 'Your action was successful!',
-        ]);
+        } 
     }
+
 }
