@@ -164,7 +164,6 @@ class HomeBannerController extends Controller
                 }
                 $validatedData['bg'] = Helper::fileUpload($request->file('bg'), $this->section, time() . '_' . getFileName($request->file('bg')));
             }
-
             
             if ($request->hasFile('image')) {
                 if ($section->image && file_exists(public_path($section->image))) {

@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Web\Backend;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\ProjectRequest;
 use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Facades\DataTables;
 
-class CategoryController extends Controller
+class ProjectController extends Controller
 {
 
     private $categoryRepository;
@@ -65,7 +65,7 @@ class CategoryController extends Controller
                 ->rawColumns([ 'image' ,'status', 'action'])
                 ->make();
         }
-        return view("backend.layouts.category.index");
+        return view("backend.layouts.project.index");
     }
 
     /**
@@ -73,13 +73,13 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('backend.layouts.category.create');
+        return view('backend.layouts.project.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoryRequest $request)
+    public function store(ProjectRequest $request)
     {
         $validatedData = $request->validated();
 
@@ -91,31 +91,31 @@ class CategoryController extends Controller
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('admin.category.index')->with('t-success', 'Category created successfully');
+        return redirect()->route('admin.project.index')->with('t-success', 'Category created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category, $id)
+    public function show(Category $project, $id)
     {
-        $category = $this->categoryRepository->find($id);
-        return view('backend.layouts.category.edit', compact('category'));
+        $project = $this->categoryRepository->find($id);
+        return view('backend.layouts.project.edit', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category, $id)
+    public function edit(Category $project, $id)
     {
-        $category = $this->categoryRepository->find($id);
-        return view('backend.layouts.category.edit', compact('category'));
+        $project = $this->categoryRepository->find($id);
+        return view('backend.layouts.project.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(ProjectRequest $request, $id)
     {
         $validatedData = $request->validated();
 
@@ -126,7 +126,7 @@ class CategoryController extends Controller
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.project.index');
     }
 
     /**
