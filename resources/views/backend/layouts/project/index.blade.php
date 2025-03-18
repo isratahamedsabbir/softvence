@@ -1,4 +1,4 @@
-@extends('backend.app', ['title' => 'Category'])
+@extends('backend.app', ['title' => 'Project'])
 
 @push('styles')
 <link href="{{ asset('default/datatable.css') }}" rel="stylesheet" />  
@@ -17,11 +17,11 @@
             <!-- PAGE-HEADER -->
             <div class="page-header">
                 <div>
-                    <h1 class="page-title">Category</h1>
+                    <h1 class="page-title">Project</h1>
                 </div>
                 <div class="ms-auto pageheader-btn">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0);">Category</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Project</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Index</li>
                     </ol>
                 </div>
@@ -35,7 +35,7 @@
                         <div class="card-header border-bottom">
                             <h3 class="card-title mb-0">List</h3>
                             <div class="card-options ms-auto">
-                                <a href="{{ route('admin.category.create') }}" class="btn btn-primary btn-sm">Add</a>
+                                <a href="{{ route('admin.project.create') }}" class="btn btn-primary btn-sm">Add</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -101,7 +101,7 @@
                 pagingType: "full_numbers",
                 dom: "<'row justify-content-between table-topbar'<'col-md-4 col-sm-3'l><'col-md-5 col-sm-5 px-0'f>>tipr",
                 ajax: {
-                    url: "{{ route('admin.category.index') }}",
+                    url: "{{ route('admin.project.index') }}",
                     type: "GET",
                 },
 
@@ -162,7 +162,7 @@
     // Status Change
     function statusChange(id) {
         NProgress.start();
-        let url = "{{ route('admin.category.status', ':id') }}";
+        let url = "{{ route('admin.project.status', ':id') }}";
         $.ajax({
             type: "GET",
             url: url.replace(':id', id),
@@ -199,7 +199,7 @@
     // Delete Button
     function deleteItem(id) {
         NProgress.start();
-        let url = "{{ route('admin.category.destroy', ':id') }}";
+        let url = "{{ route('admin.project.destroy', ':id') }}";
         let csrfToken = '{{ csrf_token() }}';
         $.ajax({
             type: "DELETE",
@@ -221,7 +221,7 @@
 
     //edit
     function goToEdit(id) {
-        let url = "{{ route('admin.category.edit', ':id') }}";
+        let url = "{{ route('admin.project.edit', ':id') }}";
         window.location.href = url.replace(':id', id);
     }
 </script>

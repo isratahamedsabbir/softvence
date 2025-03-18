@@ -2,31 +2,23 @@
 
 namespace App\Http\Controllers\Web\Backend;
 
-use App\Models\Category;
+use App\Helpers\Helper;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProjectRequest;
-use App\Repositories\Interfaces\CategoryRepositoryInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProjectController extends Controller
 {
-
-    private $categoryRepository;
-
-    public function __construct(CategoryRepositoryInterface $productRepository)
-    {
-        $this->categoryRepository = $productRepository;
-    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->categoryRepository->all();
+            $data = Project::all();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('image', function ($data) {
@@ -62,7 +54,7 @@ class ProjectController extends Controller
                                 </a>
                             </div>';
                 })
-                ->rawColumns([ 'image' ,'status', 'action'])
+                ->rawColumns(['image' ,'status', 'action'])
                 ->make();
         }
         return view("backend.layouts.project.index");
@@ -73,55 +65,122 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('backend.layouts.project.create');
+        $categories = Project::where('status', 'active')->get();
+        return view('backend.layouts.project.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProjectRequest $request)
+    public function store(Request $request)
     {
-        $validatedData = $request->validated();
+        $validate = $request->validate([
+            'name' => 'required|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'nullable|string',
+            'url' => 'nullable|string|max:255',
+            'github' => 'nullable|string|max:255',
+            'key' => 'nullable|array',
+            'value' => 'nullable|array',
+        ]);
 
         try {
-            $this->categoryRepository->create($validatedData);
-            session()->put('t-success', 'Category created successfully');
+            if ($request->hasFile('image')) {
+                $validate['image'] = Helper::fileUpload($request->file('image'), 'category', time() . '_' . getFileName($request->file('image')));
+            }
+            $validate['slug'] = Helper::makeSlug(Project::class, $validate['name']);
+
+            if ($request->has('key') && $request->has('value')) {
+                $keys = $request->key;
+                $values = $request->value;
+
+                if (count($keys) !== count($values)) {
+                    throw new Exception('Key and value must have the same count');
+                }
+
+                $metadata = [];
+                foreach ($keys as $index => $key) {
+                    $metadata[$key] = $values[$index];
+                }
+                $validate['metadata'] = json_encode($metadata);
+            }
+
+            unset($validate['key'], $validate['value']);
+
+            Project::create($validate);
+
+            session()->put('t-success', 'Project created successfully');
            
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
 
-        return redirect()->route('admin.project.index')->with('t-success', 'Category created successfully');
+        return redirect()->route('admin.project.index')->with('t-success', 'Project created successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $project, $id)
+    public function show(Project $project, $id)
     {
-        $project = $this->categoryRepository->find($id);
+        $project = Project::findOrFail($id);
         return view('backend.layouts.project.edit', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $project, $id)
+    public function edit(Project $project, $id)
     {
-        $project = $this->categoryRepository->find($id);
-        return view('backend.layouts.project.edit', compact('project'));
+        $project = Project::findOrFail($id);
+        $categories = Project::where('status', 'active')->get();
+        return view('backend.layouts.project.edit', compact('project', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProjectRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $validatedData = $request->validated();
+        $validate = $request->validate([
+            'name' => 'required|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'nullable|string',
+            'url' => 'nullable|string|max:255',
+            'github' => 'nullable|string|max:255',
+            'key' => 'nullable|array',
+            'value' => 'nullable|array',
+        ]);
 
         try {
-            $this->categoryRepository->update($id, $validatedData);
-            session()->put('t-success', 'Category updated successfully');
+            $project = Project::findOrFail($id);
+
+            if ($request->hasFile('image')) {
+                if ($project->image && file_exists(public_path($project->image))) {
+                    Helper::fileDelete(public_path($project->image));
+                }
+                $validate['image'] = Helper::fileUpload($request->file('image'), 'category', time() . '_' . getFileName($request->file('image')));
+            }
+
+            if ($request->has('key') && $request->has('value')) {
+                $keys = $request->key;
+                $values = $request->value;
+
+                if (count($keys) !== count($values)) {
+                    throw new Exception('Key and value must have the same count');
+                }
+
+                $metadata = [];
+                foreach ($keys as $index => $key) {
+                    $metadata[$key] = $values[$index];
+                }
+                $validate['metadata'] = json_encode($metadata);
+            }
+
+            unset($validate['key'], $validate['value']);
+
+            $project->update($validate);
+            session()->put('t-success', 'Project updated successfully');
         } catch (Exception $e) {
             session()->put('t-error', $e->getMessage());
         }
@@ -135,33 +194,39 @@ class ProjectController extends Controller
     public function destroy(string $id)
     {
         try {
-            $this->categoryRepository->delete($id);
+            $data = Project::findOrFail($id);
+            if ($data->image && file_exists(public_path($data->image))) {
+                Helper::fileDelete(public_path($data->image));
+            }
+            $data->delete();
             return response()->json([
                 'status' => 't-success',
                 'message' => 'Your action was successful!'
             ]);
+            
         } catch (Exception $e) {
             return response()->json([
                 'status' => 't-error',
-                'message' => $e->getMessage(),
+                'message' => 'Your action was successful!'
             ]);
         }
     }
 
     public function status(int $id): JsonResponse
     {
-        try {
-            $this->categoryRepository->status($id);
-            return response()->json([
-                'status' => 't-success',
-                'message' => 'Your action was successful!',
-            ]);
-        } catch (Exception $e) {
+        $data = Project::findOrFail($id);
+        if (!$data) {
             return response()->json([
                 'status' => 't-error',
-                'message' => $e->getMessage(),
+                'message' => 'Item not found.',
             ]);
-        } 
+        }
+        $data->status = $data->status === 'active' ? 'inactive' : 'active';
+        $data->save();
+        return response()->json([
+            'status' => 't-success',
+            'message' => 'Your action was successful!',
+        ]);
     }
 
 }
