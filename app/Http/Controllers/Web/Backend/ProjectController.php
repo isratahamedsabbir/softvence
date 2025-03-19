@@ -45,8 +45,12 @@ class ProjectController extends Controller
                 ->addColumn('action', function ($data) {
                     return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
 
-                                <a href="#" type="button" onclick="goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Delete">
+                                <a href="#" type="button" onclick="goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Edit">
                                     <i class="fe fe-edit"></i>
+                                </a>
+
+                                <a href="#" type="button" onclick="goToOpen(' . $data->id . ')" class="btn btn-success fs-14 text-white delete-icn" title="Open">
+                                    <i class="fe fe-eye"></i>
                                 </a>
 
                                 <a href="#" type="button" onclick="showDeleteConfirm(' . $data->id . ')" class="btn btn-danger fs-14 text-white delete-icn" title="Delete">
@@ -77,7 +81,9 @@ class ProjectController extends Controller
         $validate = $request->validate([
             'name' => 'required|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'nullable|file|mimes:pdf,doc,docx,txt,zip,rar,7z|max:2048',
             'description' => 'nullable|string',
+            'credintials' => 'nullable|string',
             'url' => 'nullable|string|max:255',
             'github' => 'nullable|string|max:255',
             'key' => 'nullable|array',
@@ -86,8 +92,13 @@ class ProjectController extends Controller
 
         try {
             if ($request->hasFile('image')) {
-                $validate['image'] = Helper::fileUpload($request->file('image'), 'category', time() . '_' . getFileName($request->file('image')));
+                $validate['image'] = Helper::fileUpload($request->file('image'), 'project', time() . '_' . getFileName($request->file('image')));
             }
+
+            if ($request->hasFile('file')) {
+                $validate['file'] = Helper::fileUpload($request->file('image'), 'project', time() . '_' . getFileName($request->file('file')));
+            }
+
             $validate['slug'] = Helper::makeSlug(Project::class, $validate['name']);
 
             if ($request->has('key') && $request->has('value')) {
@@ -124,7 +135,7 @@ class ProjectController extends Controller
     public function show(Project $project, $id)
     {
         $project = Project::findOrFail($id);
-        return view('backend.layouts.project.edit', compact('project'));
+        return view('backend.layouts.project.show', compact('project'));
     }
 
     /**
@@ -146,6 +157,7 @@ class ProjectController extends Controller
             'name' => 'required|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'nullable|string',
+            'credintials' => 'nullable|string',
             'url' => 'nullable|string|max:255',
             'github' => 'nullable|string|max:255',
             'key' => 'nullable|array',
@@ -159,7 +171,14 @@ class ProjectController extends Controller
                 if ($project->image && file_exists(public_path($project->image))) {
                     Helper::fileDelete(public_path($project->image));
                 }
-                $validate['image'] = Helper::fileUpload($request->file('image'), 'category', time() . '_' . getFileName($request->file('image')));
+                $validate['image'] = Helper::fileUpload($request->file('image'), 'project', time() . '_' . getFileName($request->file('image')));
+            }
+
+            if ($request->hasFile('file')) {
+                if ($project->file && file_exists(public_path($project->file))) {
+                    Helper::fileDelete(public_path($project->file));
+                }
+                $validate['file'] = Helper::fileUpload($request->file('file'), 'project', time() . '_' . getFileName($request->file('file')));
             }
 
             if ($request->has('key') && $request->has('value')) {

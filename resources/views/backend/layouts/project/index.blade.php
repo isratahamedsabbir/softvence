@@ -224,5 +224,11 @@
         let url = "{{ route('admin.project.edit', ':id') }}";
         window.location.href = url.replace(':id', id);
     }
+
+    //open
+    function goToOpen(id) {
+        let url = "{{ route('admin.project.show', ':id') }}";
+        window.location.href = url.replace(':id', id);
+    }
 </script>
 @endpush

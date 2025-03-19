@@ -41,18 +41,39 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="image" class="form-label">Image:</label>
-                                                <input type="file" class="dropify form-control @error('image') is-invalid @enderror" name="image" id="image" required>
-                                                @error('image')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="image" class="form-label">Image:</label>
+                                                        <input type="file" data-default-file="{{ url('default/logo.png') }}" class="dropify form-control @error('image') is-invalid @enderror" name="image" id="image" required>
+                                                        @error('image')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="file" class="form-label">File:</label>
+                                                        <input type="file" data-default-file="{{ url('default/logo.png') }}" class="dropify form-control @error('file') is-invalid @enderror" name="file" id="file">
+                                                        @error('file')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="description" class="form-label">Description:</label>
                                                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" placeholder="Enter here description" rows="5" required>{{ old('description') }}</textarea>
                                                 @error('description')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="credintials" class="form-label">Credintials:</label>
+                                                <textarea class="form-control @error('credintials') is-invalid @enderror" name="credintials" id="credintials" placeholder="Enter here credintials" rows="5" required>{{ old('credintials') }}</textarea>
+                                                @error('credintials')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>

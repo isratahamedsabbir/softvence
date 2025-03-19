@@ -54,7 +54,7 @@ Route::controller(ProjectController::class)->prefix('project')->name('project.')
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
-    Route::get('/single/{id}', 'single')->name('single');
+    Route::get('/show/{id}', 'show')->name('show');
     Route::get('/edit/{id}', 'edit')->name('edit');
     Route::post('/update/{id}', 'update')->name('update');
     Route::delete('/delete/{id}', 'destroy')->name('destroy');

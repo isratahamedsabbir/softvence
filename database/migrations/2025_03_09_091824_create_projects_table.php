@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('image')->nullable();
+            $table->string('file')->nullable();
             $table->longText('description')->nullable();
+            $table->longText('credintials')->nullable();
             $table->string('url')->nullable();
             $table->string('github')->nullable();
             $table->json('metadata')->nullable();
