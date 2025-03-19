@@ -42,6 +42,10 @@
                                             <th>Name</th>
                                             <td>{{ $project->name }}</td>
                                         </tr>
+                                        <tr>
+                                            <th>Description</th>
+                                            <td>{!! $project->description !!}</td>
+                                        </tr>
                                     </table>
                                 </div>
                             </div>
