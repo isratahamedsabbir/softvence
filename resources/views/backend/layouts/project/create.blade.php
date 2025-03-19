@@ -79,6 +79,22 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="features" class="form-label">Features:</label>
+                                                <textarea class="form-control @error('features') is-invalid @enderror" name="features" id="features" placeholder="Enter here features" rows="5" required>{{ old('features') }}</textarea>
+                                                @error('features')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="features" class="form-label">Note:</label>
+                                                <textarea class="form-control @error('note') is-invalid @enderror" name="note" id="note" placeholder="Enter here note" rows="5" required>{{ old('note') }}</textarea>
+                                                @error('note')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="url" class="form-label">Live Url:</label>
                                                 <input type="text" class="form-control @error('url') is-invalid @enderror" name="url" placeholder="url" id="url" value="{{ old('url') }}" required>
                                                 @error('url')
@@ -92,6 +108,23 @@
                                                 @error('github')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="start_date" class="form-label">Start Date:</label>
+                                                    <input type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" placeholder="start date" id="start_date" value="{{ old('start_date') }}" required>
+                                                    @error('start_date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="end_date" class="form-label">End Date:</label>
+                                                    <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" placeholder="end_date" id="end_date" value="{{ old('end_date') }}" required>
+                                                    @error('end_date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
                                             </div>
 
                                             <h4>Metadata</h4>

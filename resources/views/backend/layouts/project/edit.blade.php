@@ -79,6 +79,22 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="features" class="form-label">Features:</label>
+                                                <textarea class="form-control @error('features') is-invalid @enderror" name="features" id="features" placeholder="Enter features here" rows="5" required>{{ old('features', $project->features) }}</textarea>
+                                                @error('features')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="note" class="form-label">Note:</label>
+                                                <textarea class="form-control @error('note') is-invalid @enderror" name="note" id="note" placeholder="Enter note here" rows="5" required>{{ old('note', $project->note) }}</textarea>
+                                                @error('note')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="url" class="form-label">Live Url:</label>
                                                 <input type="text" class="form-control @error('url') is-invalid @enderror" name="url" placeholder="url" id="url" value="{{ old('url', $project->url) }}" required>
                                                 @error('url')
@@ -94,23 +110,40 @@
                                                 @enderror
                                             </div>
 
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <label for="start_date" class="form-label">Start Date:</label>
+                                                    <input type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" placeholder="start date" id="start_date" value="{{ old('start_date', $project->start_date) }}" required>
+                                                    @error('start_date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label for="end_date" class="form-label">End Date:</label>
+                                                    <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" placeholder="end date" id="end_date" value="{{ old('end_date', $project->end_date) }}" required>
+                                                    @error('end_date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
                                             <h4>Metadata</h4>
                                             <div class="form-group">
                                                 <div id="key-value-pair-container">
                                                     @foreach (json_decode($project->metadata, true) as $key => $value)
-                                                        <div class="key-value-pair">
-                                                            <div class="row mt-2">
-                                                                <div class="col-md-4">
-                                                                    <input type="text" name="key[]" class="form-control" placeholder="key" value="{{ $key }}" required />
-                                                                </div>
-                                                                <div class="col-md-7">
-                                                                    <input type="text" name="value[]" class="form-control" placeholder="value" value="{{ $value }}" required />
-                                                                </div>
-                                                                <div class="col-md-1">
-                                                                    <button type="button" class="btn btn-danger remove-pair"> - </button>
-                                                                </div>
+                                                    <div class="key-value-pair">
+                                                        <div class="row mt-2">
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="key[]" class="form-control" placeholder="key" value="{{ $key }}" required />
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <input type="text" name="value[]" class="form-control" placeholder="value" value="{{ $value }}" required />
+                                                            </div>
+                                                            <div class="col-md-1">
+                                                                <button type="button" class="btn btn-danger remove-pair"> - </button>
                                                             </div>
                                                         </div>
+                                                    </div>
                                                     @endforeach
                                                 </div>
                                                 <div class="row mt-2">
@@ -142,11 +175,11 @@
 
 @push('scripts')
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const container = document.getElementById("key-value-pair-container");
 
         // Add new key-value pair
-        document.getElementById("add-key-value").addEventListener("click", function () {
+        document.getElementById("add-key-value").addEventListener("click", function() {
             const newPair = document.createElement("div");
             newPair.classList.add("key-value-pair");
 
@@ -168,7 +201,7 @@
         });
 
         // Remove key-value pair
-        container.addEventListener("click", function (e) {
+        container.addEventListener("click", function(e) {
             if (e.target.classList.contains("remove-pair")) {
                 e.target.closest(".key-value-pair").remove();
             }

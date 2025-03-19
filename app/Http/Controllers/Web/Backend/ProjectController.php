@@ -84,10 +84,15 @@ class ProjectController extends Controller
             'file' => 'nullable|file|mimes:pdf,doc,docx,txt,zip,rar,7z|max:2048',
             'description' => 'nullable|string',
             'credintials' => 'nullable|string',
+            'features' => 'nullable|string',
+            'note' => 'nullable|string',
             'url' => 'nullable|string|max:255',
             'github' => 'nullable|string|max:255',
             'key' => 'nullable|array',
             'value' => 'nullable|array',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+
         ]);
 
         try {
@@ -156,12 +161,17 @@ class ProjectController extends Controller
         $validate = $request->validate([
             'name' => 'required|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'nullable|file|mimes:pdf,doc,docx,txt,zip,rar,7z|max:2048',
             'description' => 'nullable|string',
             'credintials' => 'nullable|string',
+            'features' => 'nullable|string',
+            'note' => 'nullable|string',
             'url' => 'nullable|string|max:255',
             'github' => 'nullable|string|max:255',
             'key' => 'nullable|array',
             'value' => 'nullable|array',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
         ]);
 
         try {

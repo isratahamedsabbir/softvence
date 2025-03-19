@@ -19,9 +19,13 @@ return new class extends Migration
             $table->string('file')->nullable();
             $table->longText('description')->nullable();
             $table->longText('credintials')->nullable();
+            $table->longText('features')->nullable();
+            $table->longText('note')->nullable();
             $table->string('url')->nullable();
             $table->string('github')->nullable();
             $table->json('metadata')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
