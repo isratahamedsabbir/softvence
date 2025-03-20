@@ -119,7 +119,7 @@
 
 <script>
     $('.summernote').summernote({
-        placeholder: 'Hello Bootstrap 5',
+        placeholder: 'text',
         tabsize: 2,
         height: 100
     });
