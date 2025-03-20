@@ -117,4 +117,12 @@
 @include('developer.partials.ajax')
 @include('developer.partials.notification')
 
+<script>
+    $('.summernote').summernote({
+        placeholder: 'Hello Bootstrap 5',
+        tabsize: 2,
+        height: 100
+    });
+</script>
+
 @stack('scripts')

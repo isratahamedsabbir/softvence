@@ -45,6 +45,7 @@
                                         <tr>
                                             <th class="bg-transparent border-bottom-0 wp-15">ID</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Name</th>
+                                            <th class="bg-transparent border-bottom-0 wp-15">Slug</th>
                                             <th class="bg-transparent border-bottom-0">Image</th>
                                             <th class="bg-transparent border-bottom-0">Status</th>
                                             <th class="bg-transparent border-bottom-0">Action</th>
@@ -114,6 +115,12 @@
                     {
                         data: 'name',
                         name: 'name',
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: 'slug',
+                        name: 'slug',
                         orderable: true,
                         searchable: true
                     },
