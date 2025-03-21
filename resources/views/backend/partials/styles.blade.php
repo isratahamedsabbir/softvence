@@ -34,7 +34,7 @@
 <!-- Toster -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
 
-//Main header
+
 <style>
     .header-brand-img {
         height: 4rem;
@@ -48,7 +48,7 @@
 
 @stack('styles')
 
-//flash message
+
 <style>
     .fl-wrapper {
         z-index: 1000 !important;
