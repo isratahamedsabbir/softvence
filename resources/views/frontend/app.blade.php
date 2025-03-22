@@ -24,8 +24,6 @@ $systemSetting = App\Models\Setting::first();
 <body class="ltr app horizontal landing-page">
   @include('frontend.partials.switcher')
 
-  <a href="javascript:void(0);" class="buy-now">Buy Now</a>
-
   @include('frontend.partials.loader')
 
   <div class="page">

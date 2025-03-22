@@ -7,6 +7,7 @@ use App\Enums\SectionEnum;
 use App\Http\Controllers\Controller;
 use App\Models\CMS;
 use App\Models\Post;
+use App\Models\Project;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,16 @@ class HomeController extends Controller
             'home' => CMS::where('page', PageEnum::HOME)->where('status', 'active')->get(),
             'common' => CMS::where('page', PageEnum::COMMON)->where('status', 'active')->get(),
         ];
+        
         $posts = Post::where('status', 'active')->get();
-        return view('frontend.layouts.index', compact('posts', 'cms'));
+
+        $projects = Project::where('status', 'active')->paginate(9);
+
+        return view('frontend.layouts.index', compact('cms', 'posts', 'projects'));
+    }
+
+    public function project($id){
+        $project = Project::where('id', $id)->where('status', 'active')->firstOrFail();
+        return view('frontend.layouts.project', compact('project'));
     }
 }

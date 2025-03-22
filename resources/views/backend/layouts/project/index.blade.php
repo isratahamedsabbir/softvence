@@ -45,7 +45,7 @@
                                         <tr>
                                             <th class="bg-transparent border-bottom-0 wp-15">ID</th>
                                             <th class="bg-transparent border-bottom-0 wp-15">Name</th>
-                                            <th class="bg-transparent border-bottom-0 wp-15">Slug</th>
+                                            <th class="bg-transparent border-bottom-0 wp-15">Type</th>
                                             <th class="bg-transparent border-bottom-0">Image</th>
                                             <th class="bg-transparent border-bottom-0">Status</th>
                                             <th class="bg-transparent border-bottom-0">Action</th>
@@ -83,19 +83,17 @@
             let dTable = $('#datatable').DataTable({
                 order: [],
                 lengthMenu: [
-                    [10, 25, 50, 100, -1],
-                    [10, 25, 50, 100, "All"]
+                    [25, 50, 100, -1],
+                    [25, 50, 100, "All"]
                 ],
                 processing: true,
                 responsive: true,
                 serverSide: true,
-
                 language: {
                     processing: `<div class="text-center">
                         <img src="{{ asset('default/loader.gif') }}" alt="Loader" style="width: 50px;">
                         </div>`
                 },
-
                 scroller: {
                     loadingIndicator: false
                 },
@@ -105,7 +103,6 @@
                     url: "{{ route('admin.project.index') }}",
                     type: "GET",
                 },
-
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
@@ -119,8 +116,8 @@
                         searchable: true
                     },
                     {
-                        data: 'slug',
-                        name: 'slug',
+                        data: 'type',
+                        name: 'type',
                         orderable: true,
                         searchable: true
                     },

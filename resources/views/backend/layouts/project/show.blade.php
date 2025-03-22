@@ -98,6 +98,10 @@
                                             <td>{{ $project->name ?? '' }}</td>
                                         </tr>
                                         <tr>
+                                            <th>Type</th>
+                                            <td>{{ $project->type ?? '' }}</td>
+                                        </tr>
+                                        <tr>
                                             <th>Live Url</th>
                                             <td><a href="{{ $project->url }}" target="_blank">{{ $project->url ?? '' }}</a></td>
                                         </tr>

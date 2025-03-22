@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/project/show/{id}',[HomeController::class, 'project'])->name('project.show');
+
 
 
 //Social login test routes

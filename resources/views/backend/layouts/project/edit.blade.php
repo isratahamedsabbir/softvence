@@ -34,6 +34,18 @@
                                         <div class="row mb-4">
 
                                             <div class="form-group">
+                                                <label for="type" class="form-label">Type:</label>
+                                                <select name="type" id="type" class="form-control @error('type') is-invalid @enderror" required>
+                                                    <option value="">Select Type</option>
+                                                    <option value="personal" {{ old('type', $project->type) == 'personal' ? 'selected' : '' }}>Personal</option>
+                                                    <option value="company" {{ old('type', $project->type) == 'company' ? 'selected' : '' }}>Company</option>
+                                                </select>
+                                                @error('type')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="name" class="form-label">Name:</label>
                                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" id="name" value="{{ old('name', $project->name) }}" required>
                                                 @error('name')
