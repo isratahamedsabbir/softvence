@@ -1,9 +1,34 @@
 @php
-
+use \Illuminate\Support\Str;
+use App\Enums\PageEnum;
+use App\Enums\SectionEnum;
+$cms_banner = $cms['home']->firstWhere('section', SectionEnum::HOME_BANNER);
+$cms_banners = $cms['home']->where('section', SectionEnum::HOME_BANNERS)->values();
+$cms_hero = $cms['home']->firstWhere('section', SectionEnum::HERO);
 @endphp
 
 @extends('frontend.app', ['title' => 'Project page'])
 @section('content')
+
+<!--heeder-->
+<div class="demo-screen-headline main-demo main-demo-1 overflow-hidden pb-0 mb-2" id="home">
+    <div class="container px-5 px-md-0">
+        <div class="overflow-hidden">
+            <div class="row">
+                <div class="col-lg-6 text-left pos-relative overflow-hidden p-3">
+                    <h1 class="text-shadow text-dark">{{ $cms_banner->title ?? 'Album example' }}</h1>
+                    <h6 class="mt-3">{!! $cms_banner->description ?? 'Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.' !!}</h6>
+                    <a href="{{ $cms_banner->btn_link ?? '#' }}" class="btn btn-pill btn-primary btn-w-md py-2 me-2 mb-1">{{ $cms_banner->btn_text ?? 'Main call to action' }}<i class="fe fe-activity ms-2"></i></a>
+                    <a href="#" class="btn btn-pill btn-secondary btn-w-md py-2 mb-1">Demo<i
+                            class="fe fe-file-text mx-2"></i></a>
+                </div>
+                <div class="col-lg-6 text-left pos-relative overflow-hidden market-image">
+                    <img alt="" class="logo-2" src="{{ asset($cms_banner->image ?? 'frontend/images/landing/market.png') }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="hor-content main-content mt-0">
     <div class="side-app">
@@ -11,7 +36,7 @@
         <div class="main-container">
 
             <!-- Customization-->
-            <!-- <div class="section customizable pb-6">
+            <div class="section customizable pb-6">
                 <div class="container">
                     <div class="row text-center justify-content-center">
                         <div class="col-lg-8 ps-4">
@@ -180,11 +205,11 @@
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- Customization close-->
 
             <!-- Faq's -->
-            <!-- <section class="section bg-white" id="Faq">
+            <section class="section bg-white" id="Faq">
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-lg-12">
@@ -310,9 +335,9 @@
                         </div>
                     </div>
                 </div>
-            </section> -->
+            </section>
             <!-- Faq's -->
-             
+
         </div>
     </div>
     <!-- CONTAINER CLOSED -->

@@ -25,8 +25,12 @@ class HomeController extends Controller
         return view('frontend.layouts.index', compact('cms', 'posts', 'projects'));
     }
 
-    public function project($id){
-        $project = Project::where('id', $id)->where('status', 'active')->firstOrFail();
-        return view('frontend.layouts.project', compact('project'));
+    public function project($slug){
+        $cms = [
+            'home' => CMS::where('page', PageEnum::HOME)->where('status', 'active')->get(),
+            'common' => CMS::where('page', PageEnum::COMMON)->where('status', 'active')->get(),
+        ];
+        $project = Project::where('slug', $slug)->where('status', 'active')->firstOrFail();
+        return view('frontend.layouts.project', compact('cms', 'project'));
     }
 }

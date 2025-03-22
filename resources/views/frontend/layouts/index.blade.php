@@ -844,14 +844,14 @@ $cms_hero = $cms['home']->firstWhere('section', SectionEnum::HERO);
                     </div>
                     <div class="row">
                         @foreach ($projects as $project)
-                            <div class="col-12 col-md-4 p-4 fanimate">
-                                <div class="features-icon mt-3 mb-3">
-                                    <img src="{{ $project->image ? asset($project->image) : asset('default/logo.png') }}" alt="Project Image" class="img-fluid" style="width: 50px; height: 50px;">
-                                </div>
-                                <h4 class="mx-1">{{ $project->name ?? 'Unnamed Project' }}</h4>
-                                <p class="text-muted mb-3 mx-1">{!! Str::limit($project->description ?? 'No description available', 50) !!}</p>
-                                <a class="mx-1" href="{{ route('projects.show', $project->slug) }}">Read More...</a>
+                        <div class="col-12 col-md-4 p-4 fanimate">
+                            <div class="features-icon mt-3 mb-3">
+                                <img src="{{ $project->image ? asset($project->image) : asset('default/logo.png') }}" alt="Project Image" class="img-fluid" style="width: 50px; height: 50px;">
                             </div>
+                            <h4 class="mx-1">{{ $project->name ?? 'Unnamed Project' }}</h4>
+                            <p class="text-muted mb-3 mx-1">{!! Str::limit($project->description ?? 'No description available', 50) !!}</p>
+                            <a class="mx-1" href="{{ route('project.show', $project->slug) }}">Read More...</a>
+                        </div>
                         @endforeach
                     </div>
                     <div class="d-flex justify-content-center">
