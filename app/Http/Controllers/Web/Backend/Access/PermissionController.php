@@ -29,7 +29,7 @@ class PermissionController extends Controller
 
             $permission->save();
 
-            return redirect()->route('permissions.index')->with('t-success', 'Permission created t-successfully');
+            return redirect()->route('admin.permissions.index')->with('t-success', 'Permission created t-successfully');
         }catch (\Exception $e){
             return redirect()->back()->with('t-error', $e->getMessage());
         }
@@ -71,6 +71,6 @@ class PermissionController extends Controller
             return redirect()->back()->with('t-error', 'Permission is in use');
         }
         $permission->delete();
-        return redirect()->route('permissions.index')->with('t-success', 'Permission deleted t-successfully');
+        return redirect()->route('admin.permissions.index')->with('t-success', 'Permission deleted t-successfully');
     }
 }

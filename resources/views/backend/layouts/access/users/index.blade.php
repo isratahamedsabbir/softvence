@@ -46,6 +46,7 @@
                                             <th>SN</th>
                                             <th>Name</th>
                                             <th>Roles</th>
+                                            <th>Guard</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -61,6 +62,7 @@
                                                 <span class="badge rounded-pill bg-primary">{{ $role->name }}</span>
                                                 @endforeach
                                             </td>
+                                            <td>{{ $user->roles[0]['guard_name'] }}</td>
                                             <td>
                                                 <div class="btn-group" user="group" aria-label="Basic example">
                                                     <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary"><i class="mdi mdi-pencil"></i></a>

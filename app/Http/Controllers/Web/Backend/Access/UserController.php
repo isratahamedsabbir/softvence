@@ -13,7 +13,8 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $users = User::all();
+        $users = User::with('roles')->get();
+        //dd($users);
         return view('backend.layouts.access.users.index', compact('users'));
     }
 
@@ -41,7 +42,7 @@ class UserController extends Controller
         $user->assignRole($request->roles);
 
         $user->save();
-        return redirect()->route('users.index')->with('t-success', 'User created t-successfully');
+        return redirect()->route('admin.users.index')->with('t-success', 'User created t-successfully');
     }
 
     public function edit($id)

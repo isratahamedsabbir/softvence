@@ -33,7 +33,7 @@ class RoleController extends Controller
         try {
             $role = Role::create(['name' => $request->name]);
             $role->syncPermissions($request->permissions);
-            return redirect()->route('roles.index')->with('t-success', 'Role created t-successfully');
+            return redirect()->route('admin.roles.index')->with('t-success', 'Role created t-successfully');
         } catch (Exception $exception) {
             return redirect()->back()->with('t-error', $exception->getMessage());
         }
@@ -41,9 +41,10 @@ class RoleController extends Controller
 
     public function edit($id)
     {
+        $role = Role::find($id);
         return view('backend.layouts.access.roles.edit', [
-            'role' => Role::find($id),
-            'permissions' => Permission::all()
+            'role' => $role,
+            'permissions' => Permission::where('guard_name', $role->guard_name)->get()
         ]);
     }
 
@@ -58,7 +59,7 @@ class RoleController extends Controller
             $role->update(['name' => $request->name]);
             //must pass name not id
             $role->syncPermissions($request->permissions);
-            return redirect()->route('roles.index')->with('t-success', 'Role updated t-successfully');
+            return redirect()->route('admin.roles.index')->with('t-success', 'Role updated t-successfully');
         } catch (Exception $exception) {
             return redirect()->back()->with('t-error', $exception->getMessage());
         }

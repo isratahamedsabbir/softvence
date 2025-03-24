@@ -16,10 +16,14 @@ class UserSeeder extends Seeder
     {
 
         DB::table('permissions')->insert([
-            ['name' => 'insert', 'guard_name' => 'web'],
-            ['name' => 'update', 'guard_name' => 'web'],
-            ['name' => 'delete', 'guard_name' => 'web'],
-            ['name' => 'view', 'guard_name' => 'web']
+            ['name' => 'web_insert', 'guard_name' => 'web'],
+            ['name' => 'web_update', 'guard_name' => 'web'],
+            ['name' => 'web_delete', 'guard_name' => 'web'],
+            ['name' => 'web_view', 'guard_name' => 'web'],
+            ['name' => 'api_insert', 'guard_name' => 'api'],
+            ['name' => 'api_update', 'guard_name' => 'api'],
+            ['name' => 'api_delete', 'guard_name' => 'api'],
+            ['name' => 'api_view', 'guard_name' => 'api'],
         ]);
 
         DB::table('roles')->insert([
@@ -27,6 +31,8 @@ class UserSeeder extends Seeder
             ['name' => 'admin', 'guard_name' => 'web'],
             ['name' => 'client', 'guard_name' => 'web'],
             ['name' => 'retailer', 'guard_name' => 'web'],
+            ['name' => 'user', 'guard_name' => 'api'],
+            ['name' => 'trainer', 'guard_name' => 'api'],
         ]);
 
         DB::table('users')->insert([
@@ -53,6 +59,18 @@ class UserSeeder extends Seeder
             'email' => 'retailer@retailer.com',
             'password' => Hash::make('12345678'),
             'email_verified_at' => now(),
+           ],
+           [
+            'name' => 'User',
+            'email' => 'user@user.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
+           ],
+           [
+            'name' => 'Trainer',
+            'email' => 'trainer@trainer.com',
+            'password' => Hash::make('12345678'),
+            'email_verified_at' => now(),
            ]
         ]);
 
@@ -61,72 +79,43 @@ class UserSeeder extends Seeder
             ['permission_id' => 2, 'role_id' => 1],
             ['permission_id' => 3, 'role_id' => 1],
             ['permission_id' => 4, 'role_id' => 1],
+            ['permission_id' => 5, 'role_id' => 5],
+            ['permission_id' => 6, 'role_id' => 5],
+            ['permission_id' => 7, 'role_id' => 5],
+            ['permission_id' => 8, 'role_id' => 5],
+            ['permission_id' => 5, 'role_id' => 6],
+            ['permission_id' => 6, 'role_id' => 6],
+            ['permission_id' => 7, 'role_id' => 6],
+            ['permission_id' => 8, 'role_id' => 6],
         ]);
 
         DB::table('model_has_roles')->insert([
-            [
-                'role_id' => 1,
-                'model_id' => 1,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'role_id' => 2,
-                'model_id' => 2,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'role_id' => 3,
-                'model_id' => 3,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'role_id' => 4,
-                'model_id' => 4,
-                'model_type' => 'App\Models\User'
-            ]
+            ['role_id' => 1, 'model_id' => 1, 'model_type' => 'App\Models\User'],
+            ['role_id' => 2, 'model_id' => 2, 'model_type' => 'App\Models\User'],
+            ['role_id' => 3, 'model_id' => 3, 'model_type' => 'App\Models\User'],
+            ['role_id' => 4, 'model_id' => 4, 'model_type' => 'App\Models\User'],
+            ['role_id' => 5, 'model_id' => 5, 'model_type' => 'App\Models\User'],
+            ['role_id' => 6, 'model_id' => 6, 'model_type' => 'App\Models\User'],
         ]);
 
         DB::table('model_has_permissions')->insert([
-            [
-                'permission_id' => 1,
-                'model_id' => 1,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'permission_id' => 2,
-                'model_id' => 1,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'permission_id' => 3,
-                'model_id' => 1,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'permission_id' => 4,
-                'model_id' => 1,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'permission_id' => 1,
-                'model_id' => 2,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'permission_id' => 2,
-                'model_id' => 2,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'permission_id' => 3,
-                'model_id' => 2,
-                'model_type' => 'App\Models\User'
-            ],
-            [
-                'permission_id' => 4,
-                'model_id' => 2,
-                'model_type' => 'App\Models\User'
-            ]
+            ['permission_id' => 1, 'model_id' => 1, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 2, 'model_id' => 1, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 3, 'model_id' => 1, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 4, 'model_id' => 1, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 1, 'model_id' => 2, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 2, 'model_id' => 2, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 3, 'model_id' => 2, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 4, 'model_id' => 2, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 1, 'model_id' => 3, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 2, 'model_id' => 3, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 3, 'model_id' => 3, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 4, 'model_id' => 3, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 5, 'model_id' => 5, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 6, 'model_id' => 5, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 7, 'model_id' => 5, 'model_type' => 'App\Models\User'],
+            ['permission_id' => 8, 'model_id' => 5, 'model_type' => 'App\Models\User'],
         ]);
+
     }
 }

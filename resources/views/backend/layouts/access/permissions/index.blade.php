@@ -45,6 +45,7 @@
                                         <tr>
                                             <th>SN</th>
                                             <th>Name</th>
+                                            <th>Guard</th>
                                             <th>Created</th>
                                             <th>Action</th>
                                         </tr>
@@ -56,6 +57,7 @@
                                         <tr>
                                             <td>{{ $sn++ }}</td>
                                             <td>{{ $permission->name }}</td>
+                                            <td>{{ $permission->guard_name }}</td>
                                             <td>{{ \Carbon\Carbon::parse($permission->created_at)->format('d-m-Y') }}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">

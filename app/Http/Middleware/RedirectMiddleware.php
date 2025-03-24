@@ -10,7 +10,7 @@ class RedirectMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
+        if (Auth::check() && Auth::guard('web')->check()) {
             if (Auth::user()->hasRole('developer')) {
                 return redirect()->intended(route('developer.dashboard', absolute: false));
             }elseif (Auth::user()->hasRole('admin')) {

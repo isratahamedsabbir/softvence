@@ -23,22 +23,25 @@ class RegisterController extends Controller
             'name'       => 'required|string|max:100',
             'email'      => 'required|string|email|max:150|unique:users',
             'password'   => 'required|string|min:6|confirmed',
+            'role'       => 'required|in:user,trainer',
         ]);
         try {
 
-            if ($request->input('role') == 'retailer') {
+            /* if ($request->input('role') == 'trainer') {
                 $status = 'inactive';
             } else {
                 $status = 'active';
-            }
+            } */
 
             $user = User::create([
                 'name'           => $request->input('name'),
                 'email'          => strtolower($request->input('email')),
                 'password'       => Hash::make($request->input('password')),
                 'email_verified_at' => now(),
-                'status'         => $status
+                'status'         => $status ?? 'active',
             ]);
+
+            $user->assignRole($request->input('role'));
 
             $token = auth('api')->login($user);
 
