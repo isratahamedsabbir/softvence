@@ -92,7 +92,7 @@ class ProjectController extends Controller
             'value' => 'nullable|array',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
-
+            'type' => 'nullable|in:personal,company,academic'
         ]);
 
         try {
@@ -172,6 +172,7 @@ class ProjectController extends Controller
             'value' => 'nullable|array',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
+            'type' => 'nullable|in:personal,company,academic'
         ]);
 
         try {

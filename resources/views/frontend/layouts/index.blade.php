@@ -1,4 +1,5 @@
 @php
+use \Illuminate\Support\Str;
 use App\Enums\PageEnum;
 use App\Enums\SectionEnum;
 $cms_banner = $cms['home']->firstWhere('section', SectionEnum::HOME_BANNER);
@@ -832,208 +833,36 @@ $cms_hero = $cms['home']->firstWhere('section', SectionEnum::HERO);
             <!-- Clients section Close-->
 
             <!-- Features -->
-            <!-- <div class="section bg-white pb-7" id="Features">
+            <div class="section bg-white pb-7" id="Features">
                 <div class="container">
                     <div class="row text-center justify-content-center">
                         <div class="col-lg-8 ps-4">
-                            <h3 class="header-family">Noa main Features</h3>
+                            <h3 class="header-family">Projects</h3>
                             <p class="text-default sub-text">The Noa admin template comes with ready-to-use features that are
                                 completely easy-to-use for any user, even for a beginner.</p>
                         </div>
                     </div>
                     <div class="row">
+                        @foreach ($projects as $project)
                         <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
-                                    <path fill="#8FBD56"
-                                        d="M7.00293 8.05957a3 3 0 1 1 3-3A3.00328 3.00328 0 0 1 7.00293 8.05957zm0-4a1 1 0 1 0 1 1A1.0013 1.0013 0 0 0 7.00293 4.05957zM17.00293 12.05957a3 3 0 1 1 3-3A3.00328 3.00328 0 0 1 17.00293 12.05957zm0-4a1 1 0 1 0 1 1A1.0013 1.0013 0 0 0 17.00293 8.05957zM7.00293 22.05957a3 3 0 1 1 3-3A3.00328 3.00328 0 0 1 7.00293 22.05957zm0-4a1 1 0 1 0 1 1A1.0013 1.0013 0 0 0 7.00293 18.05957z" />
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M17.00293,12.05957a2.98168,2.98168,0,0,1-1.15424-.2323,2.00186,2.00186,0,0,1-1.84576,1.2323h-4a3.95376,3.95376,0,0,0-2,.55646V7.87531a2.80519,2.80519,0,0,1-2-.00007v8.3686a2.89912,2.89912,0,0,1,2.1543.048,2.00179,2.00179,0,0,1,1.8457-1.23224h4a4.00437,4.00437,0,0,0,3.90619-3.15509A2.96013,2.96013,0,0,1,17.00293,12.05957Z" />
-                                </svg>
+                            <div class="features-icon mt-3 mb-3">
+                                <img src="{{ $project->image ? asset($project->image) : asset('default/logo.png') }}" alt="Project Image" class="img-fluid" style="width: 50px; height: 50px;">
                             </div>
-                            <h4 class="mx-1">
-                                Quality & Clean Code
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                The Noa admin code is maintained very cleanly and well-structured with proper comments.
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
+                            <h4 class="mx-1">{{ $project->name ?? 'Unnamed Project' }}</h4>
+                            <p class="text-muted mb-3 mx-1">{!! Str::limit($project->description ?? 'No description available', 50) !!}</p>
+                            <a class="mx-1" href="{{ route('project.show', $project->slug) }}">Read More...</a>
                         </div>
-
-                        <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24">
-                                    <path fill="#8FBD56"
-                                        d="M12,15.89355c-0.17551-0.00004-0.34792-0.04618-0.5-0.13378l-9-5.19727c-0.47839-0.27632-0.64221-0.88814-0.36589-1.36653C2.22187,9.04403,2.34806,8.91784,2.5,8.83008l9-5.19336c0.30964-0.17774,0.69036-0.17774,1,0l9,5.19336c0.4784,0.27632,0.64221,0.88814,0.36589,1.36653c-0.08776,0.15194-0.21395,0.27813-0.36589,0.36589l-9,5.19727C12.34792,15.84737,12.17551,15.89351,12,15.89355z" />
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M21.5,13.43359l-2.48682-1.435L12.5,15.75977c-0.1521,0.08759-0.32452,0.13373-0.5,0.13379c-0.17548-0.00006-0.3479-0.0462-0.5-0.13379L4.98682,11.9986L2.5,13.43359c-0.15192,0.08771-0.27814,0.21393-0.36591,0.36584C1.85779,14.27783,2.02161,14.88965,2.5,15.16602l9,5.19727c0.1521,0.08759,0.32452,0.13373,0.5,0.13379c0.17554-0.00006,0.3479-0.0462,0.5-0.13379l9-5.19727c0.15192-0.08777,0.27814-0.21399,0.36591-0.36591C22.14221,14.32172,21.97839,13.7099,21.5,13.43359z" />
-                                </svg>
-                            </div>
-                            <h4 class="mx-1">
-                                Multiple Demos
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                We included multiple demos to give a quick overview of our Noa admin template..
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
-                        </div>
-
-                        <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24">
-                                    <path fill="#8FBD56"
-                                        d="M16,11H8c-0.55197,0.00031-0.99969-0.44689-1-0.99886C7,10.00076,7,10.00038,7,10V6C6.99969,5.44803,7.44689,5.00031,7.99886,5C7.99924,5,7.99962,5,8,5h8c0.55197-0.00031,0.99969,0.44689,1,0.99886C17,5.99924,17,5.99962,17,6v4c0.00031,0.55197-0.44689,0.99969-0.99886,1C16.00076,11,16.00038,11,16,11z" />
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M18,2H6C4.89545,2,4,2.89545,4,4v16c0,1.10455,0.89545,2,2,2h12c1.10455,0,2-0.89545,2-2V4C20,2.89545,19.10455,2,18,2z M17,6v4c0.00031,0.55194-0.4469,0.99969-0.99884,1C16.00073,11,16.00037,11,16,11H8c-0.55194,0.00031-0.99969-0.4469-1-0.99884C7,10.00073,7,10.00037,7,10V6C6.99969,5.44806,7.4469,5.00031,7.99884,5C7.99927,5,7.99963,5,8,5h8c0.55194-0.00031,0.99969,0.4469,1,0.99884C17,5.99927,17,5.99963,17,6z" />
-                                    <circle cx="8" cy="14" r="1" fill="#8FBD56" />
-                                    <circle cx="8" cy="18" r="1" fill="#8FBD56" />
-                                    <circle cx="12" cy="18" r="1" fill="#8FBD56" />
-                                    <circle cx="16" cy="18" r="1" fill="#8FBD56" />
-                                    <circle cx="16" cy="14" r="1" fill="#8FBD56" />
-                                    <circle cx="12" cy="14" r="1" fill="#8FBD56" />
-                                </svg>
-                            </div>
-                            <h4 class="mx-1">
-                                Bootstrap5 Framework
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                Thanks to the Bootstrap 5 framework, because it gives us the ability to create responsive
-                                designs.
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
-                        </div>
-
-                        <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24">
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M16,10H8c-2.20917,0-4-1.79083-4-4v6c0.0022,2.20825,1.79175,3.9978,4,4h8c2.20825-0.0022,3.9978-1.79175,4-4V6C20,8.20917,18.20917,10,16,10z" />
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M16,16H8c-2.20825-0.0022-3.9978-1.79175-4-4v6c0.0022,2.20825,1.79175,3.9978,4,4h8c2.20825-0.0022,3.9978-1.79175,4-4v-6C19.9978,14.20825,18.20825,15.9978,16,16z" />
-                                    <polygon fill="#8FBD56" points="20 5.998 20 6 20 5.999" />
-                                    <path fill="#8FBD56"
-                                        d="M16,10H8c-2.20914,0-4-1.79086-4-4s1.79086-4,4-4h8c2.20914,0,4,1.79086,4,4S18.20914,10,16,10z" />
-                                    <circle cx="8" cy="13" r="1" fill="#8FBD56" />
-                                    <circle cx="8" cy="19" r="1" fill="#8FBD56" />
-                                </svg>
-                            </div>
-                            <h4 class="mx-1">
-                                50+ additional plugins
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                We integrated 50+ plugins into the Noa admin template for better development.
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
-                        </div>
-
-                        <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M21,22H14a.99974.99974,0,0,1-1-1V14a.99974.99974,0,0,1,1-1h7a.99974.99974,0,0,1,1,1v7A.99974.99974,0,0,1,21,22Z" />
-                                    <path fill="#8FBD56"
-                                        d="M7.91406 17.5l2.793-2.793A.99989.99989 0 0 0 9.293 13.293L6.5 16.08594 3.707 13.293A.99989.99989 0 0 0 2.293 14.707l2.793 2.793L2.293 20.293A.99989.99989 0 1 0 3.707 21.707l2.793-2.793 2.793 2.793A.99989.99989 0 0 0 10.707 20.293zM21 11H14a1.00009 1.00009 0 0 1-.89453-1.44727l3.5-7a1.04127 1.04127 0 0 1 1.78906 0l3.5 7A1.00009 1.00009 0 0 1 21 11z" />
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M6.5,11A4.5,4.5,0,1,1,11,6.5,4.50491,4.50491,0,0,1,6.5,11Z" />
-                                </svg>
-                            </div>
-                            <h4 class="mx-1">
-                                10 types of Icons
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                10 types of best Icons are included in this template to enhance design.
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
-                        </div>
-
-                        <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24">
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M8.44444,3.11121c-1.10457,0-2,0.89543-2,2v13.55556c-0.00003,1.22729-0.99493,2.22219-2.22222,2.22223h14.44445C20.50762,20.889,22,19.39662,22,17.55567c0,0,0-0.00001,0-0.00001V5.11121c0-1.10457-0.89543-2-2-2L8.44444,3.11121z" />
-                                    <path fill="#8FBD56"
-                                        d="M6.44446,18.66675V7.55603H4c-1.10455,0-2,0.89539-2,1.99994v9.33301c0,1.10461,0.89545,2,2,2h0.22223C5.44952,20.88898,6.4444,19.89404,6.44446,18.66675z" />
-                                    <path fill="#8FBD56"
-                                        d="M17,9.0001h-6c-0.55229,0-1-0.44771-1-1s0.44771-1,1-1h6c0.55228,0,1,0.44772,1,1S17.55228,9.0001,17,9.0001z M17,13.0001h-1c-0.55229,0-1-0.44771-1-1s0.44771-1,1-1h1c0.55228,0,1,0.44771,1,1S17.55228,13.0001,17,13.0001z M12,13.0001h-1c-0.55229,0-1-0.44771-1-1s0.44771-1,1-1h1c0.55229,0,1,0.44771,1,1S12.55229,13.0001,12,13.0001z M17,17.0001h-1c-0.55229,0-1-0.44772-1-1c0-0.55229,0.44771-1,1-1h1c0.55228,0,1,0.44771,1,1C18,16.55238,17.55228,17.0001,17,17.0001z M12,17.0001h-1c-0.55229,0-1-0.44772-1-1c0-0.55229,0.44771-1,1-1h1c0.55229,0,1,0.44771,1,1C13,16.55238,12.55229,17.0001,12,17.0001z" />
-                                </svg>
-                            </div>
-                            <h4 class="mx-1">
-                                Advanced Pages
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                More advanced pages are included in this template for easy development.
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
-                        </div>
-
-                        <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
-                                    <rect width="18" height="6" x="3" y="3" fill="#8FBD56" opacity=".3" rx="2" />
-                                    <rect width="18" height="6" x="3" y="9" fill="#8FBD56" opacity=".3" rx="2" />
-                                    <rect width="18" height="6" x="3" y="15" fill="#8FBD56" opacity=".3" rx="2" />
-                                    <circle cx="18" cy="6" r="1" fill="#8FBD56" />
-                                    <circle cx="18" cy="12" r="1" fill="#8FBD56" />
-                                    <circle cx="18" cy="18" r="1" fill="#8FBD56" />
-                                    <circle cx="15" cy="6" r="1" fill="#8FBD56" />
-                                    <circle cx="15" cy="12" r="1" fill="#8FBD56" />
-                                    <circle cx="15" cy="18" r="1" fill="#8FBD56" />
-                                    <path fill="#8FBD56"
-                                        d="M9 7H6A1 1 0 0 1 6 5H9A1 1 0 0 1 9 7zM9 13H6a1 1 0 0 1 0-2H9a1 1 0 0 1 0 2zM9 19H6a1 1 0 0 1 0-2H9a1 1 0 0 1 0 2z" />
-                                </svg>
-                            </div>
-                            <h4 class="mx-1">
-                                Built for developers
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                Noa is built to make your work easier. Variables, elements, documentation, and reusable
-                                components.
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
-                        </div>
-
-                        <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M20,8.99969l-7-7H7a3,3,0,0,0-3,3v14a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3Z" />
-                                    <path fill="#8FBD56"
-                                        d="M20 8.99969H15a2 2 0 0 1-2-2v-5zM19 22a.99974.99974 0 0 1-1-1V19a1 1 0 0 1 2 0v2A.99974.99974 0 0 1 19 22zM19 17a1.03391 1.03391 0 0 1-.71-.29.99108.99108 0 0 1-.21045-1.08984A1.14883 1.14883 0 0 1 18.29 15.29a1.02673 1.02673 0 0 1 .32959-.21.91433.91433 0 0 1 .76025 0 1.03418 1.03418 0 0 1 .33008.21 1.15772 1.15772 0 0 1 .21.33008A.98919.98919 0 0 1 19.71 16.71a1.15384 1.15384 0 0 1-.33008.21A.9994.9994 0 0 1 19 17zM15 18H9a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2zM15 14H9a1 1 0 0 1 0-2h6a1 1 0 0 1 0 2zM10 10H9A1 1 0 0 1 9 8h1a1 1 0 0 1 0 2z" />
-                                </svg>
-                            </div>
-                            <h4 class="mx-1">
-                                Documentation
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                The documentation provides clear-cut material for the Noa admin template user can understand .
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
-                        </div>
-
-                        <div class="col-12 col-md-4 p-4 fanimate">
-                            <div class="features-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 24 24">
-                                    <path fill="#8FBD56" opacity=".3"
-                                        d="M11,22A9,9,0,0,1,11,4a.99943.99943,0,0,1,1,1v7h7a.99943.99943,0,0,1,1,1A9.00984,9.00984,0,0,1,11,22Z" />
-                                    <path fill="#8FBD56"
-                                        d="M21,10H15a.99943.99943,0,0,1-1-1V3a.99943.99943,0,0,1,1-1,7.0018,7.0018,0,0,1,7,7A.99943.99943,0,0,1,21,10Z" />
-                                </svg>
-                            </div>
-                            <h4 class="mx-1">
-                                5 Types Of Charts
-                            </h4>
-                            <p class="text-muted mb-3 mx-1">
-                                We included five (5) types of the best possible chart options for your project..
-                            </p>
-                            <a class="mx-1" href="#">Read More <i class="fe fe-chevron-right"></i></a>
-                        </div>
+                        @endforeach
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        {{ $projects->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- Features Close-->
 
             <!-- Pricing -->
-            <!-- <div class="section pb-7" id="features">
+            <div class="section pb-7" id="features">
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-lg-12 ps-3">
@@ -1357,7 +1186,7 @@ $cms_hero = $cms['home']->firstWhere('section', SectionEnum::HERO);
                         </div>
                     </div>
                 </div>
-            </div> -->
+            </div>
             <!-- Pricing close -->
 
             <!-- Faq's -->

@@ -34,6 +34,19 @@
                                         <div class="row mb-4">
 
                                             <div class="form-group">
+                                                <label for="type" class="form-label">Type:</label>
+                                                <select name="type" id="type" class="form-control @error('type') is-invalid @enderror" required>
+                                                    <option value="">Select Type</option>
+                                                    <option value="personal" {{ old('type', $project->type) == 'personal' ? 'selected' : '' }}>Personal</option>
+                                                    <option value="company" {{ old('type', $project->type) == 'company' ? 'selected' : '' }}>Company</option>
+                                                    <option value="academic" {{ old('type', $project->type) == 'academic' ? 'selected' : '' }}>Academic</option>
+                                                </select>
+                                                @error('type')
+                                                <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="name" class="form-label">Name:</label>
                                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" id="name" value="{{ old('name', $project->name) }}" required>
                                                 @error('name')
@@ -64,7 +77,7 @@
 
                                             <div class="form-group">
                                                 <label for="description" class="form-label">Description:</label>
-                                                <textarea class="summernote form-control @error('description') is-invalid @enderror" name="description" id="description" placeholder="Enter here description" rows="5" required>{{ old('description', $project->description) }}</textarea>
+                                                <textarea class="summernote form-control @error('description') is-invalid @enderror" name="description" id="description" placeholder="Enter here description" rows="5">{{ old('description', $project->description) }}</textarea>
                                                 @error('description')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -72,7 +85,7 @@
 
                                             <div class="form-group">
                                                 <label for="credintials" class="form-label">Credintials:</label>
-                                                <textarea class="summernote form-control @error('credintials') is-invalid @enderror" name="credintials" id="credintials" placeholder="Enter here credintials" rows="5" required>{{ old('credintials', $project->credintials) }}</textarea>
+                                                <textarea class="summernote form-control @error('credintials') is-invalid @enderror" name="credintials" id="credintials" placeholder="Enter here credintials" rows="5">{{ old('credintials', $project->credintials) }}</textarea>
                                                 @error('credintials')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -80,7 +93,7 @@
 
                                             <div class="form-group">
                                                 <label for="features" class="form-label">Features:</label>
-                                                <textarea class="summernote form-control @error('features') is-invalid @enderror" name="features" id="features" placeholder="Enter features here" rows="5" required>{{ old('features', $project->features) }}</textarea>
+                                                <textarea class="summernote form-control @error('features') is-invalid @enderror" name="features" id="features" placeholder="Enter features here" rows="5">{{ old('features', $project->features) }}</textarea>
                                                 @error('features')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -88,7 +101,7 @@
 
                                             <div class="form-group">
                                                 <label for="note" class="form-label">Note:</label>
-                                                <textarea class="summernote form-control @error('note') is-invalid @enderror" name="note" id="note" placeholder="Enter note here" rows="5" required>{{ old('note', $project->note) }}</textarea>
+                                                <textarea class="summernote form-control @error('note') is-invalid @enderror" name="note" id="note" placeholder="Enter note here" rows="5">{{ old('note', $project->note) }}</textarea>
                                                 @error('note')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -96,7 +109,7 @@
 
                                             <div class="form-group">
                                                 <label for="url" class="form-label">Live Url:</label>
-                                                <input type="text" class="form-control @error('url') is-invalid @enderror" name="url" placeholder="url" id="url" value="{{ old('url', $project->url) }}" required>
+                                                <input type="text" class="form-control @error('url') is-invalid @enderror" name="url" placeholder="url" id="url" value="{{ old('url', $project->url) }}">
                                                 @error('url')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror

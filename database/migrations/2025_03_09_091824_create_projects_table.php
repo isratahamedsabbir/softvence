@@ -26,6 +26,7 @@ return new class extends Migration
             $table->json('metadata')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->enum('type', ['personal', 'company', 'academic'])->default('personal');
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
