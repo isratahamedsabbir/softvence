@@ -47,6 +47,7 @@
                                             <th>Name</th>
                                             <th>Roles</th>
                                             <th>Guard</th>
+                                            <th>Created</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -63,6 +64,7 @@
                                                 @endforeach
                                             </td>
                                             <td>{{ $user->roles[0]['guard_name'] }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y') }}</td>
                                             <td>
                                                 <div class="btn-group" user="group" aria-label="Basic example">
                                                     <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-primary"><i class="mdi mdi-pencil"></i></a>
