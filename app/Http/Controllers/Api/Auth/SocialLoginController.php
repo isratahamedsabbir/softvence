@@ -31,6 +31,7 @@ class SocialLoginController extends Controller
         $request->validate([
             'token'    => 'required',
             'provider' => 'required|in:google,facebook,apple',
+            'role'       => 'required|in:user,trainer',
         ]);
 
         try {
@@ -46,13 +47,20 @@ class SocialLoginController extends Controller
 
                 if (!$user) {
                     $password = Str::random(16);
+                    /* if ($request->input('role') == 'trainer') {
+                        $status = 'inactive';
+                    } else {
+                        $status = 'active';
+                    } */
                     $user     = User::create([
                         'name'              => $socialUser->getName(),
                         'email'             => $socialUser->getEmail(),
                         'password'          => bcrypt($password),
-                        'avatar'             => $socialUser->getAvatar(),
+                        'avatar'            => $socialUser->getAvatar(),
+                        'status'            => $status ?? 'active',
                         'email_verified_at' => now(),
                     ]);
+                    $user->assignRole($request->input('role'));
                     $isNewUser = true;
                     //notify to admin start
                     /* $admins = User::where('role', 'admin')->get();
