@@ -14,7 +14,7 @@ class TrainerMiddleware
             return $next($request);
         }
 
-        return response()->json(['error' => 'Unauthorized action.'], Response::HTTP_FORBIDDEN);
+        return response()->json(['error' => 'Unauthorized action.']);
     }
 }
 
