@@ -132,7 +132,8 @@
                         data: 'status',
                         name: 'status',
                         orderable: false,
-                        searchable: false
+                        searchable: false,
+                        className: 'dt-center text-center'
                     },
                     {
                         data: 'action',
