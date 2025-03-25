@@ -24,7 +24,7 @@ class ProjectController extends Controller
                 ->addColumn('image', function ($data) {
                     if ($data->image) {
                         $url = asset($data->image);
-                        return '<img src="' . $url . '" alt="image" width="50px" max-height="100px" style="margin-left:20px;">';
+                        return '<img src="' . $url . '" alt="image" style="width: 50px; max-height: 100px; margin-left: 20px;">';
                     } else {
                         return '<img src="' . asset('default/logo.png') . '" alt="image" width="50px" height="50px" style="margin-left:20px;">';
                     }
