@@ -43,7 +43,7 @@ class ProjectController extends Controller
                     return $status;
                 })
                 ->addColumn('action', function ($data) {
-                    return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                    return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example text-center">
 
                                 <a href="#" type="button" onclick="goToEdit(' . $data->id . ')" class="btn btn-primary fs-14 text-white delete-icn" title="Edit">
                                     <i class="fe fe-edit"></i>
