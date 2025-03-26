@@ -10,7 +10,7 @@ class TrainerMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::guard('api')->check() && Auth::user()->hasRole('trainer')) {
+        if (Auth::guard('api')->check() && Auth::guard('api')->check() && Auth::guard('api')->user()->hasRole('trainer')) {
             return $next($request);
         }
 
