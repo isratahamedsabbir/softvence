@@ -18,8 +18,9 @@ class HomeBannerController extends Controller
 {
     protected $cmsService;
 
-    public $page = PageEnum::HOME;
+    public $name = "home";
     public $section = "banner";
+    public $page = PageEnum::HOME;
     public $item = SectionEnum::HOME_BANNER;
     public $items = SectionEnum::HOME_BANNERS;
     public $count = 3;
@@ -74,7 +75,7 @@ class HomeBannerController extends Controller
         }
 
         $section = CMS::where('page', $this->page)->where('section', $this->item)->latest()->first();
-        return view("backend.layouts.cms.home.{$this->section}.index", compact('section'));
+        return view("backend.layouts.cms.{$this->name}.{$this->section}.index", compact('section'));
     }
 
     /**
@@ -82,7 +83,7 @@ class HomeBannerController extends Controller
      */
     public function create()
     {
-        return view("backend.layouts.cms.home.{$this->section}.create");
+        return view("backend.layouts.cms.{$this->name}.{$this->section}.create");
     }
 
     /**
@@ -119,7 +120,7 @@ class HomeBannerController extends Controller
             // Create or update the CMS entry
             CMS::create($validatedData);
 
-            return redirect()->route("admin.cms.home.{$this->section}.index")->with('t-success', 'Created successfully');
+            return redirect()->route("admin.cms.{$this->name}.{$this->section}.index")->with('t-success', 'Created successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }
@@ -131,7 +132,7 @@ class HomeBannerController extends Controller
     public function show(string $id)
     {
         $section = CMS::findOrFail($id);
-        return view("backend.layouts.cms.home.{$this->section}.update", compact("section"));
+        return view("backend.layouts.cms.{$this->name}.{$this->section}.update", compact("section"));
     }
 
     /**
@@ -140,7 +141,7 @@ class HomeBannerController extends Controller
     public function edit(string $id)
     {
         $section = CMS::findOrFail($id);
-        return view("backend.layouts.cms.home.{$this->section}.update", compact("section"));
+        return view("backend.layouts.cms.{$this->name}.{$this->section}.update", compact("section"));
     }
 
     /**
@@ -181,7 +182,7 @@ class HomeBannerController extends Controller
             // Update the CMS entry with the validated data
             $section->update($validatedData);
 
-            return redirect()->route("admin.cms.home.{$this->section}.index")->with('t-success', 'Updated successfully');
+            return redirect()->route("admin.cms.{$this->name}.{$this->section}.index")->with('t-success', 'Updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }
@@ -257,7 +258,7 @@ class HomeBannerController extends Controller
                 CMS::create($validatedData);
             }
 
-            return redirect()->route("admin.cms.home.{$this->section}.index")->with('t-success', 'Updated successfully');
+            return redirect()->route("admin.cms.{$this->name}.{$this->section}.index")->with('t-success', 'Updated successfully');
         } catch (Exception $e) {
             return redirect()->back()->with('t-error', $e->getMessage());
         }

@@ -11,7 +11,7 @@ class CustomerMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->hasRole('client')) {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasRole('client')) {
             return $next($request);
         }
         return abort(403, 'Unauthorized action.');

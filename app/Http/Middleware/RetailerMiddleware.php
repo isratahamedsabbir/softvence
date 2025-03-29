@@ -11,7 +11,7 @@ class RetailerMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->hasRole('retailer')) {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasRole('retailer')) {
             return $next($request);
         }
 

@@ -10,7 +10,7 @@ class DeveloperMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->hasRole('developer')) {
+        if (Auth::guard('web')->check() && Auth::guard('web')->user()->hasRole('developer')) {
             return $next($request);
         }
 
