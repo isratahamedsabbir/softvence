@@ -47,6 +47,9 @@ return Application::configure(basePath: dirname(__DIR__))
         /* $middleware->validateCsrfTokens(except: [
             'payment/stripe-webhook',
         ]); */
+        /* $middleware->api([
+            \Illuminate\Session\Middleware\StartSession::class,
+        ]); */
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function (Throwable $e, Request $request) {
